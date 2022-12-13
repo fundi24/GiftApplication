@@ -16,7 +16,7 @@ public class Gift implements Serializable {
 	private boolean multiplePayment;
 	private String linkToWebstite;
 	private ListGift listGift;
-	private ArrayList<History> histories;
+	private ArrayList<Participation> participations;
 	
 	public Gift ()
 	{
@@ -103,12 +103,12 @@ public class Gift implements Serializable {
 		this.listGift = listGift;
 	}
 
-	public ArrayList<History> getHistories() {
-		return histories;
+	public ArrayList<Participation> getParticipations() {
+		return participations;
 	}
 
-	public void setHistories(ArrayList<History> histories) {
-		this.histories = histories;
+	public void setParticipations(ArrayList<Participation> participations) {
+		this.participations = participations;
 	}
 
 }
