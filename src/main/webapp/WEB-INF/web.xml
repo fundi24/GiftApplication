@@ -9,4 +9,29 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>Home</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.Home</servlet-class>
+  </servlet>
+  
+<servlet>
+  	<servlet-name>Register</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.Register</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>Home</servlet-name>
+  	<url-pattern>/home</url-pattern>
+  	<url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  
+    <servlet-mapping>
+  	<servlet-name>Register</servlet-name>
+  	<url-pattern>/register</url-pattern>
+  	<url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+  
+  
+  
 </web-app>

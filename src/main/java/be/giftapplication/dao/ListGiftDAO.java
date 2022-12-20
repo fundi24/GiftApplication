@@ -7,8 +7,7 @@ import be.giftapplication.javabeans.ListGift;
 
 public class ListGiftDAO extends DAO<ListGift> {
 
-	public ListGiftDAO(Connection conn) {
-		super(conn);
+	public ListGiftDAO() {
 	}
 
 	@Override
