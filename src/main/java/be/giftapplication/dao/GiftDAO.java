@@ -7,8 +7,7 @@ import be.giftapplication.javabeans.Gift;
 
 public class GiftDAO extends DAO<Gift> {
 
-	public GiftDAO(Connection conn) {
-		super(conn);
+	public GiftDAO() {
 	}
 
 	@Override

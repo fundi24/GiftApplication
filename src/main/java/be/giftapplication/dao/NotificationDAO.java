@@ -7,8 +7,7 @@ import be.giftapplication.javabeans.Notification;
 
 public class NotificationDAO extends DAO<Notification> {
 
-	public NotificationDAO(Connection conn) {
-		super(conn);
+	public NotificationDAO() {
 	}
 
 	@Override

@@ -8,8 +8,7 @@ import be.giftapplication.javabeans.Participation;
 
 public class ParticipationDAO extends DAO<Participation> {
 	
-	public ParticipationDAO (Connection conn) {
-        super(conn);
+	public ParticipationDAO () {
     }
 
     @Override

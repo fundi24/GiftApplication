@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import be.giftapplication.dao.CustomerDAO;
+import be.giftapplication.dao.DAO;
+
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 2411323456692016479L;
+	private static final DAO<Customer> customerDAO = new CustomerDAO();
 	private int idCustomer;
 	private String firstName;
 	private String lastName;
@@ -21,6 +25,19 @@ public class Customer implements Serializable {
 	public Customer()
 	{
 		
+	}
+	public Customer(int idCustomer, String firstName, String lastName, LocalDate dateOfBirth, String username,
+			String password) {
+		this.idCustomer = idCustomer;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dateOfBirth = dateOfBirth;
+		this.username = username;
+		this.password = password;
+		participations = new ArrayList<>();
+		myListGifts = new ArrayList<>();
+		sharedListGifts = new ArrayList<>();
+		notifications = new ArrayList<>();
 	}
 
 	public int getIdCustomer() {
@@ -101,6 +118,10 @@ public class Customer implements Serializable {
 
 	public void setNotifications(ArrayList<Notification> notifications) {
 		this.notifications = notifications;
+	}
+	
+	public boolean insert() {
+		return customerDAO.create(this);
 	}
 
 }
