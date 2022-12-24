@@ -123,5 +123,10 @@ public class Customer implements Serializable {
 	public boolean insert() {
 		return customerDAO.create(this);
 	}
+	
+	public static Customer login (String username, String password) {
+		CustomerDAO customerdao = new CustomerDAO();
+		return customerdao.find(username, password);
+	}
 
 }
