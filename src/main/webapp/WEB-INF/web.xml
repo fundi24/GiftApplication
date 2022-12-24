@@ -15,9 +15,14 @@
   	<servlet-class>be.giftapplication.servlets.Home</servlet-class>
   </servlet>
   
-<servlet>
+  <servlet>
   	<servlet-name>Register</servlet-name>
   	<servlet-class>be.giftapplication.servlets.Register</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>MyGiftLists</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.MyGiftLists</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -26,10 +31,16 @@
   	<url-pattern>/index</url-pattern>
   </servlet-mapping>
   
-    <servlet-mapping>
+   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/register</url-pattern>
   	<url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>MyGiftLists</servlet-name>
+  	<url-pattern>/mygiftlists</url-pattern>
+  	<url-pattern>/meslistes</url-pattern>
   </servlet-mapping>
   
   

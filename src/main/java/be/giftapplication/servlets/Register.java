@@ -70,7 +70,7 @@ public class Register extends HttpServlet {
 				Customer customer = new Customer(0,firstNameParam, lastNameParam, dateOfBirthParam, usernameParam, passwordParam1);
 				if(customer.insert())
 				{
-					request.setAttribute("registerSuccess", "Yes");
+					request.setAttribute("registerSuccess", "Inscription réussite");
 					request.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
 				}

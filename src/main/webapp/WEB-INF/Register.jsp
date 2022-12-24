@@ -51,7 +51,7 @@
 	<%
         if (request.getAttribute("registerSuccess") != null) {%>
         <div class="alert alert-success">
-       <p>Inscription réussite !</p> 
+       <p><%= request.getAttribute("registerSuccess")%></p> 
        </div>
     <% 
         }
