@@ -35,4 +35,5 @@ public class ParticipationDAO extends DAO<Participation> {
     public ArrayList<Participation> findAll(int id) {
         return null;
     }
+
 }

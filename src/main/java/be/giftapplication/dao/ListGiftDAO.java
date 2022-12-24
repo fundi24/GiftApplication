@@ -34,4 +34,5 @@ public class ListGiftDAO extends DAO<ListGift> {
 	public ArrayList<ListGift> findAll(int id) {
 		return null;
 	}
+
 }

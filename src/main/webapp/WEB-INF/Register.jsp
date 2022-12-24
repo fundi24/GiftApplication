@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%!ArrayList<String> errors = new ArrayList<>();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,47 +9,54 @@
 <title>Inscription</title>
 </head>
 <body>
-	<h1>Formulaire d'inscription</h1>
-	<form action="register" method="POST">
-		<table border="1" cellspacing="0" cellpadding="5">
-			<tr>
-				<td>Nom :</td>
-				<td><input type="text" name="lastName" id="lastName" value=""
-					size="20" /></td>
-			</tr>
-			<tr>
-				<td>Prénom :</td>
-				<td><input type="text" name="firstName" id="firstName" value=""
-					size="20" /></td>
-			</tr>
-			<tr>
-				<td>Date de naissance :</td>
-				<td><input type="date" name="dateOfBirth" id="dateOfBirth" value=""
-					size="20" /></td>
-			</tr>
-			<tr>
-				<td>Nom d'utilisateur :</td>
-				<td><input type="text" name="username" id="username" value=""
-					size="20" /></td>
-			</tr>
-			<tr>
-				<td>Mot de passe :</td>
-				<td><input type="password" name="password1" id="password1" value=""
-					size="20" /></td>
-			</tr>
-						<tr>
-				<td>Confirmer le mot de passe :</td>
-				<td><input type="password" name="password2" id="password2" value=""
-					size="20" /></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					name="submit" id="submit" value="Valider" /></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"> <a href="home">Page d'accueil</a> </td>
-			</tr>
-		</table>
-	</form>
+    <%@ include file="Header.jsp"%>
+    <form action="register" method="POST">
+        <%
+            errors = (ArrayList<String>) request.getAttribute("errors");
+        %>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Nom</label>
+             <input type="text" class="form-control" name="lastName" id="lastName" required>
+            <div class="form-text"><%=errors.get(0)%></div>
+        </div>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">Prénom</label> 
+            <input type="text" class="form-control" name="firstName" id="firstName" required>
+            <div class="form-text"><%=errors.get(1)%></div>
+        </div>
+               <div class="mb-3">
+            <label for="dateOfBirth" class="form-label">Date de naissance</label>
+             <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" required>
+            <div class="form-text"><%=errors.get(2)%></div>
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur</label> 
+            <input type="text" class="form-control" name="username" id="username" required>
+            <div class="form-text"><%=errors.get(3)%></div>
+        </div>
+               <div class="mb-3">
+            <label for="password1" class="form-label">Mot de passe</label>
+             <input type="password" class="form-control" name="password1" id="password1" required>
+            <div class="form-text"><%=errors.get(4)%></div>
+        </div>
+        <div class="mb-3">
+            <label for="password2" class="form-label">Confirmer le mot de passe</label> 
+            <input type="password" class="form-control" name="password2" id="password2" required>
+            <div class="form-text"><%=errors.get(5) %> </div>
+            <div class="form-text"><%=errors.get(6) %> </div>
+        </div>
+        <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+	<%
+        if (request.getAttribute("registerSuccess") != null) {%>
+        <div class="alert alert-success">
+       <p>Inscription réussite !</p> 
+       </div>
+    <% 
+        }
+    %>
+    <a href="home">Retour</a>
+
 </body>
 </html>
