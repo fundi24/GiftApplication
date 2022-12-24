@@ -9,6 +9,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
@@ -84,11 +85,18 @@ public class CustomerDAO extends DAO<Customer> {
 			res = this.resource.path("customer").path("login").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, mapper.writeValueAsString(customer));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 200) {
-				MultivaluedMap<String,String> response=new MultivaluedMapImpl();
-				response = res.getHeaders();
-				String value = response.getFirst("id");
-				int id = Integer.valueOf(value);
-				customer = find(id);
+				String response=res.getEntity(String.class);
+				JSONObject json = new JSONObject(response);
+				System.out.println(json);
+				int id = json.getInt("idCustomer");
+				String firstName = json.getString("firstName");
+				String lastName = json.getString("lastName");
+				JSONObject jsonDob = json.getJSONObject("dateOfBirth");
+				int year = jsonDob.getInt("year");
+				int month = jsonDob.getInt("monthValue");
+				int day = jsonDob.getInt("dayOfMonth");
+				LocalDate dateOfBirth = LocalDate.of(year, month, day);
+				customer = new Customer(id,firstName, lastName, dateOfBirth, username, password);
 				return customer;
 			}
 			else
