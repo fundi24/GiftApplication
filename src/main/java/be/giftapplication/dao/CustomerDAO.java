@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 import be.giftapplication.javabeans.Customer;
+import be.giftapplication.javabeans.Gift;
 
 public class CustomerDAO extends DAO<Customer> {
 
@@ -86,7 +87,6 @@ public class CustomerDAO extends DAO<Customer> {
 			if (httpResponseCode == 200) {
 				String response=res.getEntity(String.class);
 				JSONObject json = new JSONObject(response);
-				System.out.println(json);
 				int id = json.getInt("idCustomer");
 				String firstName = json.getString("firstName");
 				String lastName = json.getString("lastName");
@@ -107,4 +107,8 @@ public class CustomerDAO extends DAO<Customer> {
 			return null;
 		}
 	}
+	
+	
+	
+	
 }

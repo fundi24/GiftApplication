@@ -2,6 +2,8 @@ package be.giftapplication.javabeans;
 
 import java.io.Serializable;
 
+
+
 public class Notification implements Serializable {
 	private static final long serialVersionUID = 3306630235932605381L;
 	private int idNotification;
@@ -13,6 +15,15 @@ public class Notification implements Serializable {
 	{
 		
 	}
+	
+	public Notification(int idNotification, String message, boolean read, Customer customer) {
+		this.idNotification = idNotification;
+		this.message = message;
+		this.read = read;
+		this.customer = customer;
+	 }
+	    
+	 //Getters and Setters
 
 	public int getIdNotification() {
 		return idNotification;
@@ -45,5 +56,7 @@ public class Notification implements Serializable {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+	
+	//Call to DAO
 	
 }

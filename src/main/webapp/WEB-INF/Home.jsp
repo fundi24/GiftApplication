@@ -34,7 +34,7 @@
     <% 
         }
     %>
-    <a href="register">Inscription</a>
+    <a href="register" class="btn btn-primary btn-sm active">Inscription</a>
 
 </body>
 </html>

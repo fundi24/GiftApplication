@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 public class Gift implements Serializable {
 	private static final long serialVersionUID = -375971532475389184L;
 	private int idGift;
@@ -20,8 +21,33 @@ public class Gift implements Serializable {
 	
 	public Gift ()
 	{
-		
+		participations = new ArrayList<>();
 	}
+
+	
+
+	public Gift(int idGift, String name, String description, Image picture, double price, int priority, boolean booked,
+			boolean multiplePayment, String linkToWebstite, ListGift listGift) {
+		
+		this.idGift = idGift;
+		this.name = name;
+		this.description = description;
+		this.picture = picture;
+		this.price = price;
+		this.priority = priority;
+		this.booked = booked;
+		this.multiplePayment = multiplePayment;
+		this.linkToWebstite = linkToWebstite;
+		this.listGift = listGift;
+		participations = new ArrayList<>();
+	}
+
+
+
+
+
+
+	//Getters and Setters
 
 	public int getIdGift() {
 		return idGift;
@@ -111,4 +137,15 @@ public class Gift implements Serializable {
 		this.participations = participations;
 	}
 
+	//Add and remove for lists
+	
+	public void addParticipation(Participation participation) {
+		participations.add(participation);
+	}
+		
+	public void removeParticipation(Participation participation) {
+		participations.remove(participation);
+	}
+		
+	//Call to DAO
 }

@@ -56,7 +56,7 @@
     <% 
         }
     %>
-    <a href="home">Retour</a>
+    <a href="home" class="btn btn-primary btn-sm active">Retour</a>
 
 </body>
 </html>

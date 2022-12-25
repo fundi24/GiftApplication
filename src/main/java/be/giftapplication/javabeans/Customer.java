@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+
 import be.giftapplication.dao.CustomerDAO;
 import be.giftapplication.dao.DAO;
 
@@ -24,6 +25,10 @@ public class Customer implements Serializable {
 	
 	public Customer()
 	{
+		participations = new ArrayList<>();
+		myListGifts = new ArrayList<>();
+		sharedListGifts = new ArrayList<>();
+		notifications = new ArrayList<>();
 		
 	}
 	public Customer(int idCustomer, String firstName, String lastName, LocalDate dateOfBirth, String username,
@@ -40,6 +45,8 @@ public class Customer implements Serializable {
 		notifications = new ArrayList<>();
 	}
 
+	//Getters and Setters
+	
 	public int getIdCustomer() {
 		return idCustomer;
 	}
@@ -120,6 +127,41 @@ public class Customer implements Serializable {
 		this.notifications = notifications;
 	}
 	
+	//Add and remove for lists
+	
+	public void addParticipation(Participation participation) {
+		participations.add(participation);
+	}
+	public void addMyListGifts(ListGift listGift) {
+		myListGifts.add(listGift);
+	}
+		
+	public void addSharedListGift(ListGift sharedlistGift) {
+		sharedListGifts.add(sharedlistGift);
+	}
+		
+	public void addNotifications(Notification notification) {
+		notifications.add(notification);
+	}
+		
+	public void removeParticipation(Participation participation) {
+		participations.remove(participation);
+	}
+	public void removeMyListGifts(ListGift listGift) {
+		myListGifts.remove(listGift);
+	}
+		
+	public void removeSharedListGift(ListGift sharedlistGift) {
+		sharedListGifts.remove(sharedlistGift);
+	}
+		
+	public void removeNotifications(Notification notification) {
+		notifications.remove(notification);
+	}
+		
+	
+	//Call to DAO
+	
 	public boolean insert() {
 		return customerDAO.create(this);
 	}
@@ -128,5 +170,7 @@ public class Customer implements Serializable {
 		CustomerDAO customerdao = new CustomerDAO();
 		return customerdao.find(username, password);
 	}
+	
+	
 
 }

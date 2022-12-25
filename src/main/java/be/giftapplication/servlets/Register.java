@@ -80,6 +80,7 @@ public class Register extends HttpServlet {
 				}
 
 			}else {
+				
 				request.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
 			}
@@ -160,5 +161,6 @@ public class Register extends HttpServlet {
 		
 		return error;
 	}
+	
 	
 }
