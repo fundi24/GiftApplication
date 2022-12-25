@@ -20,8 +20,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<% if(session.getAttribute("customer") != null){ %>
-                    <li class="nav-item"><a class="nav-link" href="#">Mes listes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Mes notifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="mygiftlists">Mes listes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="">Mes notifications</a></li>
                     <li class="nav-item"><a class="nav-link" href="home">Déconnexion</a></li><%} %>
                     
                 </ul>
