@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import be.giftapplication.dao.DAO;
+import be.giftapplication.dao.ListGiftDAO;
+
 public class ListGift implements Serializable {
 
 	private static final long serialVersionUID = 99181030694279507L;
+	private static final DAO<ListGift> listGiftDAO = new ListGiftDAO();
 	private int idListGift;
 	private String name;
 	private LocalDate deadline;
@@ -18,8 +22,25 @@ public class ListGift implements Serializable {
 	
 	public ListGift()
 	{
-		
+		participants = new ArrayList<>();
+		gifts = new ArrayList<>();
 	}
+	
+	
+
+	public ListGift(int idListGift, String name, LocalDate deadline, boolean status, String theme, Customer owner) {
+		this.idListGift = idListGift;
+		this.name = name;
+		this.deadline = deadline;
+		this.status = status;
+		this.theme = theme;
+		this.owner = owner;
+		participants = new ArrayList<>();
+		gifts = new ArrayList<>();
+	}
+
+
+	//Getters and Setters
 
 	public int getIdListGift() {
 		return idListGift;
@@ -84,5 +105,43 @@ public class ListGift implements Serializable {
 	public void setGifts(ArrayList<Gift> gifts) {
 		this.gifts = gifts;
 	}
+	
+	//Add and remove for lists
+    
+    public void addParticipant(Customer participant) {
+		participants.add(participant);
+	}
+	
+    
+    public void removeParticipant(Customer participant) {
+		participants.remove(participant);
+	}
+    
+    public void addGift(Gift gift) {
+    	gifts.add(gift);
+    }
+    
+    public void removeGift(Gift gift) {
+    	gifts.remove(gift);
+    }
+	
+	//Call to DAO
+	public static ArrayList<ListGift> getListGiftsFromCustomer(Customer customer) {
+		
+		return listGiftDAO.findAll(customer);
+	}
+	
+	public boolean insert() {
+		return listGiftDAO.create(this);
+	}
 
+
+
+	@Override
+	public String toString() {
+		return "ListGift [idListGift=" + idListGift + ", name=" + name + ", deadline=" + deadline + ", status=" + status
+				+ ", theme=" + theme + ", owner=" + owner + ", participants=" + participants + ", gifts=" + gifts + "]";
+	}
+	
+	
 }

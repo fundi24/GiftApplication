@@ -16,32 +16,32 @@
         %>
         <div class="mb-3">
             <label for="lastName" class="form-label">Nom</label>
-             <input type="text" class="form-control" name="lastName" id="lastName" required>
+             <input type="text" class="form-control" name="lastName" id="lastName">
             <div class="form-text"><%=errors.get(0)%></div>
         </div>
         <div class="mb-3">
             <label for="firstName" class="form-label">Prénom</label> 
-            <input type="text" class="form-control" name="firstName" id="firstName" required>
+            <input type="text" class="form-control" name="firstName" id="firstName">
             <div class="form-text"><%=errors.get(1)%></div>
         </div>
                <div class="mb-3">
             <label for="dateOfBirth" class="form-label">Date de naissance</label>
-             <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" required>
+             <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth">
             <div class="form-text"><%=errors.get(2)%></div>
         </div>
         <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur</label> 
-            <input type="text" class="form-control" name="username" id="username" required>
+            <input type="text" class="form-control" name="username" id="username">
             <div class="form-text"><%=errors.get(3)%></div>
         </div>
                <div class="mb-3">
             <label for="password1" class="form-label">Mot de passe</label>
-             <input type="password" class="form-control" name="password1" id="password1" required>
+             <input type="password" class="form-control" name="password1" id="password1">
             <div class="form-text"><%=errors.get(4)%></div>
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">Confirmer le mot de passe</label> 
-            <input type="password" class="form-control" name="password2" id="password2" required>
+            <input type="password" class="form-control" name="password2" id="password2" >
             <div class="form-text"><%=errors.get(5) %> </div>
             <div class="form-text"><%=errors.get(6) %> </div>
         </div>
@@ -51,12 +51,20 @@
 	<%
         if (request.getAttribute("registerSuccess") != null) {%>
         <div class="alert alert-success">
-       <p>Inscription réussite !</p> 
+       <p><%= request.getAttribute("registerSuccess")%></p> 
        </div>
     <% 
         }
     %>
-    <a href="home">Retour</a>
+    	<%
+        if (request.getAttribute("registerError") != null) {%>
+        <div class="alert alert-danger">
+       <p><%= request.getAttribute("registerError")%></p> 
+       </div>
+    <% 
+        }
+    %>
+    <a href="home" class="btn btn-primary btn-sm active">Retour</a>
 
 </body>
 </html>

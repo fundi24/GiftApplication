@@ -55,28 +55,30 @@ public class Register extends HttpServlet {
 	     }
 		String lastNameParam = request.getParameter("lastName");
 		String firstNameParam = request.getParameter("firstName");
-		String dob = request.getParameter("dateOfBirth");
+		String dobParam = request.getParameter("dateOfBirth");
 		String usernameParam = request.getParameter("username");
 		String passwordParam1 = request.getParameter("password1");
 		String passwordParam2 = request.getParameter("password2");
 
 		if (request.getParameter("submit") != null) {
 			
-			errors = checkingParameters(lastNameParam, firstNameParam, dob, usernameParam,
+			errors = checkingParameters(lastNameParam, firstNameParam, dobParam, usernameParam,
 					passwordParam1, passwordParam2, errors);
 			if (!checkErrors(errors)) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dateOfBirthParam = LocalDate.parse(dob, formatter);
+				LocalDate dateOfBirthParam = LocalDate.parse(dobParam, formatter);
 				Customer customer = new Customer(0,firstNameParam, lastNameParam, dateOfBirthParam, usernameParam, passwordParam1);
 				if(customer.insert())
 				{
-					request.setAttribute("registerSuccess", "Yes");
+					request.setAttribute("registerSuccess", "Inscription réussite");
 					request.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
 				}
 				else
 				{
-					System.out.println("Erreur inscription");
+					request.setAttribute("registerError", "Erreur dans l'inscription.");
+                	request.setAttribute("errors", errors);
+                	getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
 				}
 
 			}else {
@@ -126,7 +128,7 @@ public class Register extends HttpServlet {
 		LocalDate today = LocalDate.now();
 		
 		if(dob == null || dob.isEmpty()) {
-			errors.add(3,"Le champ [Date de naissance] est vide.");
+			errors.add(2,"Le champ [Date de naissance] est vide.");
 		}
 		else {
 			try {
@@ -134,14 +136,14 @@ public class Register extends HttpServlet {
 				LocalDate dateOfBirthParam = LocalDate.parse(dob, formatter);
 				
 				if (Period.between(dateOfBirthParam, today).getYears() < 16) {
-					errors.add(3,"Vous devez avoir minimum de 16 ans.");
+					errors.add(2,"Vous devez avoir minimum de 16 ans.");
 				}
 				if (Period.between(dateOfBirthParam, today).getYears() > 120) {
-					errors.add(3,"Vous devez avoir moins de 120 ans.");
+					errors.add(2,"Vous devez avoir moins de 120 ans.");
 				}
 				
 			}catch(Exception e) {
-				errors.add(3,"Le champ [Date de naissance] est incorrecte.");
+				errors.add(2,"Le champ [Date de naissance] est incorrecte.");
 			}
 			
 		}
@@ -160,5 +162,6 @@ public class Register extends HttpServlet {
 		
 		return error;
 	}
+	
 	
 }

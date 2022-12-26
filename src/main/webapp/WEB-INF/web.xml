@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>GiftApplication</display-name>
+  
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>be.giftapplication.filters.AuthenticationFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <servlet-name>MyGiftLists</servlet-name>
+  </filter-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -15,10 +26,26 @@
   	<servlet-class>be.giftapplication.servlets.Home</servlet-class>
   </servlet>
   
-<servlet>
+  <servlet>
   	<servlet-name>Register</servlet-name>
   	<servlet-class>be.giftapplication.servlets.Register</servlet-class>
   </servlet>
+  
+  <servlet>
+  	<servlet-name>MyGiftLists</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.MyGiftLists</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>ConsultListGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ConsultListGift</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>CreateListGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.CreateListGift</servlet-class>
+  </servlet>
+  
   
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -26,12 +53,29 @@
   	<url-pattern>/index</url-pattern>
   </servlet-mapping>
   
-    <servlet-mapping>
+   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/register</url-pattern>
   	<url-pattern>/inscription</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  	<servlet-name>MyGiftLists</servlet-name>
+  	<url-pattern>/mygiftlists</url-pattern>
+  	<url-pattern>/meslistes</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>ConsultListGift</servlet-name>
+  	<url-pattern>/consultlistgift</url-pattern>
+  	<url-pattern>/consulterlistecadeaux</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>CreateListGift</servlet-name>
+  	<url-pattern>/createlistgift</url-pattern>
+  	<url-pattern>/creerlistecadeaux</url-pattern>
+  </servlet-mapping>
   
   
 </web-app>

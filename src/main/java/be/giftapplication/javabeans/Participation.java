@@ -2,6 +2,8 @@ package be.giftapplication.javabeans;
 
 import java.io.Serializable;
 
+
+
 public class Participation implements Serializable {
 	private static final long serialVersionUID = -4098840781809412627L;
 	private int idParticipation;
@@ -13,6 +15,15 @@ public class Participation implements Serializable {
 	{
 		
 	}
+	
+	public Participation(int idParticipation, double amountPaid, Customer customer, Gift gift) {
+		this.idParticipation = idParticipation;
+		this.amountPaid = amountPaid;
+		this.customer = customer;
+		this.gift = gift;
+	}
+	
+	//Getters and Setters
 
 	public int getIdParticipation() {
 		return idParticipation;
@@ -45,4 +56,6 @@ public class Participation implements Serializable {
 	public void setGift(Gift gift) {
 		this.gift = gift;
 	}
+	
+	//Call to DAO
 }
