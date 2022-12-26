@@ -171,6 +171,13 @@ public class Customer implements Serializable {
 		return customerdao.find(username, password);
 	}
 	
+	public boolean getCustomerListGifts(){
+		myListGifts = ListGift.getListGiftsFromCustomer(this);
+		if(myListGifts != null) {
+			return true;
+		}
+		return false;
+	}
 	
 
 }

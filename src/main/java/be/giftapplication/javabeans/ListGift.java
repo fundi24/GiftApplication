@@ -128,7 +128,7 @@ public class ListGift implements Serializable {
 	//Call to DAO
 	public static ArrayList<ListGift> getListGiftsFromCustomer(Customer customer) {
 		
-		return listGiftDAO.findAll(customer.getIdCustomer());
+		return listGiftDAO.findAll(customer);
 	}
 	
 	
