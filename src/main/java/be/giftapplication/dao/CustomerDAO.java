@@ -70,7 +70,7 @@ public class CustomerDAO extends DAO<Customer> {
 	}
 
 	@Override
-	public ArrayList<Customer> findAll(int id) {
+	public ArrayList<Customer> findAll(Object obj) {
 		return null;
 	}
 

@@ -37,8 +37,8 @@ public class MyGiftLists extends HttpServlet {
 		if(session != null) {
 			Customer customer = (Customer) session.getAttribute("customer");
 			if(customer != null) {
-				ArrayList<ListGift> giftLists = ListGift.getListGiftsFromCustomer(customer);
-				request.setAttribute("giftLists", giftLists);
+				boolean receipt = customer.getCustomerListGifts();
+				request.setAttribute("giftLists", customer.getMyListGifts());
 				getServletContext().getRequestDispatcher("/WEB-INF/MyGiftLists.jsp").forward(request, response);
 			}
 			

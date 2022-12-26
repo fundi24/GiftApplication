@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import be.giftapplication.javabeans.Customer;
 import be.giftapplication.javabeans.ListGift;
 
 public class ListGiftDAO extends DAO<ListGift> {
@@ -37,10 +38,14 @@ public class ListGiftDAO extends DAO<ListGift> {
 	}
 
 	@Override
-	public ArrayList<ListGift> findAll(int idCustomer) {
+	public ArrayList<ListGift> findAll(Object obj) {
+		Customer customer = null;
+		if(obj instanceof Customer) {
+			 customer = (Customer) obj;
+		}
 		ArrayList<ListGift> giftLists = new ArrayList<>();
 		
-		String APIResponse = this.resource.path("listgift").path("customer").path(String.valueOf(idCustomer)).accept(MediaType.APPLICATION_JSON).get(String.class);
+		String APIResponse = this.resource.path("listgift").path("customer").path(String.valueOf(customer.getIdCustomer())).accept(MediaType.APPLICATION_JSON).get(String.class);
 		
 		if(APIResponse != null) {
 			JSONArray array = new JSONArray(APIResponse);
@@ -50,16 +55,16 @@ public class ListGiftDAO extends DAO<ListGift> {
 				
 				for(int i=0; i < array.length(); i++) {
 					
-					JSONObject obj = array.getJSONObject(i);
-					int idListGift = obj.getInt("idListGift");
-					String name = obj.getString("name");
-					JSONObject jsonDob = obj.getJSONObject("deadline");
+					JSONObject objJson = array.getJSONObject(i);
+					int idListGift = objJson.getInt("idListGift");
+					String name = objJson.getString("name");
+					JSONObject jsonDob = objJson.getJSONObject("deadline");
 					int year = jsonDob.getInt("year");
 					int month = jsonDob.getInt("monthValue");
 					int day = jsonDob.getInt("dayOfMonth");
-					boolean status = obj.getBoolean("status");
-					String theme = obj.getString("theme");
-					ListGift listGift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, null);
+					boolean status = objJson.getBoolean("status");
+					String theme = objJson.getString("theme");
+					ListGift listGift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, customer);
 					
 					giftLists.add(listGift);
 				}
