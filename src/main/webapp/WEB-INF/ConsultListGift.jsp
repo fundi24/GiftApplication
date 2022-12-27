@@ -41,15 +41,46 @@
 			<form action="consultgift" method="get"> 
 			<input type="hidden" name="idGift" 
 				value="<%= g.getIdGift() %>" />
-			<td><button type="submit" name="ConsultGiftBtn" value="ConsultGift" class = "btn btn-primary btn-sm">Consulter</button></td>
-		</form>
+			<td><button type="submit" class = "btn btn-primary btn-sm">Consulter</button></td>
+			</form>
+			<form action="modifygift" method="get"> 
+			<input type="hidden" name="idGift" 
+				value="<%= g.getIdGift() %>" />
+			<td><button type="submit" class = "btn btn-primary btn-sm">Modifier</button></td>
+			</form>
 		</tr>
 		<%} %>
 		
 	<%} %>
 	</table>
-	<a href="creategift" class="btn btn-primary btn-sm active">Ajouter cadeau</a>
-	<a href="modifypriority" class="btn btn-primary btn-sm active">Modifier priorité</a>
-	<a href="modifystatuslist" class="btn btn-primary btn-sm active">Activé/Désactivé</a>
+	<div class="row g-3">
+		<div class="col-auto">
+			<form action="creategift" method="get"> 
+				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
+				<td><button type="submit" class = "btn btn-primary btn-sm">Ajouter cadeau</button></td>
+			</form>
+		</div>
+		<div class="col-auto">
+			<form action="modifypriority" method="get"> 
+				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
+				<td><button type="submit" class = "btn btn-primary btn-sm">Modifier priorité</button></td>
+			</form>
+		</div>
+		<div class="col-auto">
+			<form action="modifystatuslist" method="get"> 
+				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
+				<td><button type="submit" class = "btn btn-primary btn-sm">Activer/Désactiver</button></td>
+			</form>
+		</div>
+		<div class="col-auto">
+			<form action="consultinvitations" method="get"> 
+				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
+				<td><button type="submit" class = "btn btn-primary btn-sm">Consulter invitations</button></td>
+			</form>
+		</div>
+	</div>
+	
+	<div class="mt-1" ><a href="mygiftlists" class="btn btn-primary btn-sm active">Retour</a></div>
+	
 </body>
 </html>

@@ -53,6 +53,7 @@ public class Register extends HttpServlet {
 	     {
 	        	errors.add("");
 	     }
+		
 		String lastNameParam = request.getParameter("lastName");
 		String firstNameParam = request.getParameter("firstName");
 		String dobParam = request.getParameter("dateOfBirth");
@@ -68,6 +69,7 @@ public class Register extends HttpServlet {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateOfBirthParam = LocalDate.parse(dobParam, formatter);
 				Customer customer = new Customer(0,firstNameParam, lastNameParam, dateOfBirthParam, usernameParam, passwordParam1);
+				
 				if(customer.insert())
 				{
 					request.setAttribute("registerSuccess", "Inscription réussite");
@@ -76,8 +78,7 @@ public class Register extends HttpServlet {
 				}
 				else
 				{
-
-					
+					request = saveParametersInRequest(request, lastNameParam, firstNameParam, dobParam, usernameParam, passwordParam1, passwordParam2);
 					request.setAttribute("registerError", "Erreur dans l'inscription.");
                 	request.setAttribute("errors", errors);
                 	getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
@@ -85,13 +86,14 @@ public class Register extends HttpServlet {
 				}
 
 			}else {
+				request = saveParametersInRequest(request, lastNameParam, firstNameParam, dobParam, usernameParam, passwordParam1, passwordParam2);
 				request.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
 			}
 		}
 	}
 
-	public ArrayList<String> checkingParameters(String lastNameParam, String firstNameParam, String dob,
+	public ArrayList<String> checkingParameters(String lastNameParam, String firstNameParam, String dobParam,
 			String usernameParam, String passwordParam1, String passwordParam2, ArrayList<String> errors) {
 
 
@@ -104,16 +106,15 @@ public class Register extends HttpServlet {
 			errors.add(1,"Le champ [prénom] est vide.");
 		}
 
-		errors = checkDateOfBirth(dob, errors);
+		errors = checkDateOfBirth(dobParam, errors);
 		
 		
 		if(usernameParam == null || usernameParam.equals("") || !usernameParam.matches("^[0-9a-zA-Z]{5,}$")) {
 			errors.add(3,"Le champ [nom d'utilisateur] doit avoir au moins 5 caractères.");
-			
 		}
 
 		
-		if (passwordParam1 == null || usernameParam.equals("") || !passwordParam1.matches("^[0-9a-zA-Z]{6,}$")) {
+		if (passwordParam1 == null || passwordParam1.equals("") || !passwordParam1.matches("^[0-9a-zA-Z]{6,}$")) {
 			errors.add(4,"Le champ [mot de passe] doit avoir au moins 6 caractères.");
 		}
 
@@ -122,6 +123,7 @@ public class Register extends HttpServlet {
 		}
 		if (!passwordParam2.equals(passwordParam1)) {
 			errors.add(6,"Les deux mots de passes ne sont pas identiques");
+			
 		}
 
 		return errors;
@@ -164,6 +166,20 @@ public class Register extends HttpServlet {
 		}
 		
 		return error;
+	}
+	
+	public HttpServletRequest saveParametersInRequest(HttpServletRequest request, String lastNameParam, String firstNameParam, String dobParam,
+			String usernameParam, String passwordParam1, String passwordParam2) {
+		
+		request.setAttribute("lastNameSave", lastNameParam);
+		request.setAttribute("firstNameSave", firstNameParam);
+		request.setAttribute("dateOfBirthSave", dobParam);
+		request.setAttribute("usernameSave", usernameParam);
+		request.setAttribute("passwordSave1", passwordParam1);
+		request.setAttribute("passwordSave2", passwordParam2);
+		
+		return request;
+		
 	}
 	
 	
