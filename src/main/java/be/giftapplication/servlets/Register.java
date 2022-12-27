@@ -76,11 +76,15 @@ public class Register extends HttpServlet {
 				}
 				else
 				{
+
 					
+					request.setAttribute("registerError", "Erreur dans l'inscription.");
+                	request.setAttribute("errors", errors);
+                	getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
+
 				}
 
 			}else {
-				
 				request.setAttribute("errors", errors);
 				getServletContext().getRequestDispatcher("/WEB-INF/Register.jsp").forward(request, response);
 			}
@@ -127,7 +131,7 @@ public class Register extends HttpServlet {
 		LocalDate today = LocalDate.now();
 		
 		if(dob == null || dob.isEmpty()) {
-			errors.add(3,"Le champ [Date de naissance] est vide.");
+			errors.add(2,"Le champ [Date de naissance] est vide.");
 		}
 		else {
 			try {
@@ -135,14 +139,14 @@ public class Register extends HttpServlet {
 				LocalDate dateOfBirthParam = LocalDate.parse(dob, formatter);
 				
 				if (Period.between(dateOfBirthParam, today).getYears() < 16) {
-					errors.add(3,"Vous devez avoir minimum de 16 ans.");
+					errors.add(2,"Vous devez avoir minimum de 16 ans.");
 				}
 				if (Period.between(dateOfBirthParam, today).getYears() > 120) {
-					errors.add(3,"Vous devez avoir moins de 120 ans.");
+					errors.add(2,"Vous devez avoir moins de 120 ans.");
 				}
 				
 			}catch(Exception e) {
-				errors.add(3,"Le champ [Date de naissance] est incorrecte.");
+				errors.add(2,"Le champ [Date de naissance] est incorrecte.");
 			}
 			
 		}

@@ -41,7 +41,10 @@
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">Confirmer le mot de passe</label> 
+
             <input type="password" class="form-control" name="password2" id="password2">
+
+
             <div class="form-text"><%=errors.get(5) %> </div>
             <div class="form-text"><%=errors.get(6) %> </div>
         </div>
@@ -52,6 +55,14 @@
         if (request.getAttribute("registerSuccess") != null) {%>
         <div class="alert alert-success">
        <p><%= request.getAttribute("registerSuccess")%></p> 
+       </div>
+    <% 
+        }
+    %>
+    	<%
+        if (request.getAttribute("registerError") != null) {%>
+        <div class="alert alert-danger">
+       <p><%= request.getAttribute("registerError")%></p> 
        </div>
     <% 
         }

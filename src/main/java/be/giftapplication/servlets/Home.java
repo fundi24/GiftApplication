@@ -74,10 +74,10 @@ public class Home extends HttpServlet {
                     }
                 	
                 }
-             
+
             }
             else {
-            	
+
                 request.setAttribute("errors", errors);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp");
                 dispatcher.forward(request, response);

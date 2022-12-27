@@ -9,6 +9,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
@@ -107,8 +108,6 @@ public class CustomerDAO extends DAO<Customer> {
 			return null;
 		}
 	}
-	
-	
 	
 	
 }
