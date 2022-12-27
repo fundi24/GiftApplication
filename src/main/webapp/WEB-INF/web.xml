@@ -73,7 +73,7 @@
   
    <servlet-mapping>
   	<servlet-name>CreateListGift</servlet-name>
-  	<url-pattern>/ctreatelistgift</url-pattern>
+  	<url-pattern>/createlistgift</url-pattern>
   	<url-pattern>/creerlistecadeaux</url-pattern>
   </servlet-mapping>
   

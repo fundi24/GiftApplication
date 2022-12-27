@@ -131,6 +131,17 @@ public class ListGift implements Serializable {
 		return listGiftDAO.findAll(customer);
 	}
 	
-	
+	public boolean insert() {
+		return listGiftDAO.create(this);
+	}
 
+
+
+	@Override
+	public String toString() {
+		return "ListGift [idListGift=" + idListGift + ", name=" + name + ", deadline=" + deadline + ", status=" + status
+				+ ", theme=" + theme + ", owner=" + owner + ", participants=" + participants + ", gifts=" + gifts + "]";
+	}
+	
+	
 }

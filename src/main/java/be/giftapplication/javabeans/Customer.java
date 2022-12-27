@@ -178,6 +178,13 @@ public class Customer implements Serializable {
 		}
 		return false;
 	}
+	@Override
+	public String toString() {
+		return "Customer [idCustomer=" + idCustomer + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", dateOfBirth=" + dateOfBirth + ", username=" + username + ", password=" + password + "]";
+	}
+	
+	
 	
 
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.time.LocalDate"%>
+
 <%@page import="be.giftapplication.javabeans.ListGift"%>
 <%!ArrayList<ListGift> giftLists;%>
 <!DOCTYPE html>
@@ -27,7 +29,12 @@
 	<tr>
 		<td><%= l.getName() %></td>
 		<td><%= l.getTheme() %></td>
-		<td><%= l.getDeadline() %></td>
+		
+		<%if(l.getDeadline().equals(LocalDate.of(1000, 1, 1))){ %>
+			<td>Non défini</td>
+		<%} else{ %>
+			<td><%=l.getDeadline()%></td>
+		<%} %>
 		<%if(l.isStatus() == true){ %>
 			<td>Activée</td>
 		<%} else{ %>
