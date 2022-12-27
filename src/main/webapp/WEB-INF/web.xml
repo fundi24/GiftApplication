@@ -10,6 +10,9 @@
   <filter-mapping>
     <filter-name>AuthenticationFilter</filter-name>
     <servlet-name>MyGiftLists</servlet-name>
+    <servlet-name>CreateListGift</servlet-name>
+    <servlet-name>ConsultListGift</servlet-name>
+    <servlet-name>CreateGift</servlet-name>
   </filter-mapping>
   
   <welcome-file-list>
@@ -46,6 +49,12 @@
   	<servlet-class>be.giftapplication.servlets.CreateListGift</servlet-class>
   </servlet>
   
+  <servlet>
+  	<servlet-name>CreateGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.CreateGift</servlet-class>
+  </servlet>
+  
+  
   
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -73,8 +82,15 @@
   
    <servlet-mapping>
   	<servlet-name>CreateListGift</servlet-name>
-  	<url-pattern>/ctreatelistgift</url-pattern>
+  	<url-pattern>/createlistgift</url-pattern>
   	<url-pattern>/creerlistecadeaux</url-pattern>
+  </servlet-mapping>
+  
+  
+   <servlet-mapping>
+  	<servlet-name>CreateGift</servlet-name>
+  	<url-pattern>/creategift</url-pattern>
+  	<url-pattern>/creercadeaux</url-pattern>
   </servlet-mapping>
   
   

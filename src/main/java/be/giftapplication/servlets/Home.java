@@ -55,7 +55,7 @@ public class Home extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         if(request.getParameter("submit") != null) {
-            errors = checkParameters(username, password, errors);
+            errors = checkParameters(username, password, errors, request);
             if(!checkErrors(errors)) {
                 Customer customer = Customer.login(username, password);
                 if(customer == null) {
@@ -74,10 +74,10 @@ public class Home extends HttpServlet {
                     }
                 	
                 }
-                //a continuer
+             
             }
             else {
-            	System.out.println(errors);
+            	
                 request.setAttribute("errors", errors);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp");
                 dispatcher.forward(request, response);
@@ -87,15 +87,17 @@ public class Home extends HttpServlet {
         
     }
     
-    public ArrayList<String> checkParameters(String username, String password, ArrayList<String> errors) {
+    public ArrayList<String> checkParameters(String username, String password, ArrayList<String> errors, HttpServletRequest request) {
         
         
         if(username == null || username.isEmpty()) {
             errors.add(0,"Le champ [Nom d'utilisateur] est vide.");
+            request.setAttribute("usernameSave", username);
         }
         
         if(password == null || password.isEmpty()) {
             errors.add(1,"Le champ [Password] est vide.");
+            request.setAttribute("passwordSave", password);
         }
         
         return errors;

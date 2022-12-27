@@ -4,15 +4,20 @@ import java.awt.Image;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import be.giftapplication.dao.DAO;
+import be.giftapplication.dao.GiftDAO;
+import be.giftapplication.dao.ListGiftDAO;
+
 
 public class Gift implements Serializable {
 	private static final long serialVersionUID = -375971532475389184L;
+	private static final DAO<Gift> giftDAO = new GiftDAO();
 	private int idGift;
 	private String name;
 	private String description;
-	private Image picture;
 	private double price;
 	private int priority;
+	private Image picture;
 	private boolean booked;
 	private boolean multiplePayment;
 	private String linkToWebstite;
@@ -26,13 +31,12 @@ public class Gift implements Serializable {
 
 	
 
-	public Gift(int idGift, String name, String description, Image picture, double price, int priority, boolean booked,
+	public Gift(int idGift, String name, String description,  double price, int priority, boolean booked,
 			boolean multiplePayment, String linkToWebstite, ListGift listGift) {
 		
 		this.idGift = idGift;
 		this.name = name;
 		this.description = description;
-		this.picture = picture;
 		this.price = price;
 		this.priority = priority;
 		this.booked = booked;
@@ -41,8 +45,6 @@ public class Gift implements Serializable {
 		this.listGift = listGift;
 		participations = new ArrayList<>();
 	}
-
-
 
 
 
@@ -73,14 +75,6 @@ public class Gift implements Serializable {
 		this.description = description;
 	}
 
-	public Image getPicture() {
-		return picture;
-	}
-
-	public void setPicture(Image picture) {
-		this.picture = picture;
-	}
-
 	public double getPrice() {
 		return price;
 	}
@@ -96,6 +90,15 @@ public class Gift implements Serializable {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+	
+	public Image getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Image picture) {
+		this.picture = picture;
+	}
+
 
 	public boolean isBooked() {
 		return booked;
@@ -148,4 +151,10 @@ public class Gift implements Serializable {
 	}
 		
 	//Call to DAO
+	
+	public static ArrayList<Gift> getGiftsFromListGift(ListGift listGift) {
+		return giftDAO.findAll(listGift);
+	}
+	
+	
 }

@@ -173,7 +173,7 @@ public class Customer implements Serializable {
 	
 	public boolean getCustomerListGifts(){
 		myListGifts = ListGift.getListGiftsFromCustomer(this);
-		if(myListGifts != null) {
+		if(myListGifts.size() > 0) {
 			return true;
 		}
 		return false;

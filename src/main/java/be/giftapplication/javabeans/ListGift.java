@@ -132,5 +132,13 @@ public class ListGift implements Serializable {
 	}
 	
 	
+	public boolean getListGiftGifts() {
+		gifts = Gift.getGiftsFromListGift(this);
+		if(gifts != null) {
+			return true;
+		}
+		return false;
+	}
+	
 
 }

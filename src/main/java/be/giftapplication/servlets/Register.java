@@ -55,18 +55,18 @@ public class Register extends HttpServlet {
 	     }
 		String lastNameParam = request.getParameter("lastName");
 		String firstNameParam = request.getParameter("firstName");
-		String dob = request.getParameter("dateOfBirth");
+		String dobParam = request.getParameter("dateOfBirth");
 		String usernameParam = request.getParameter("username");
 		String passwordParam1 = request.getParameter("password1");
 		String passwordParam2 = request.getParameter("password2");
 
 		if (request.getParameter("submit") != null) {
 			
-			errors = checkingParameters(lastNameParam, firstNameParam, dob, usernameParam,
+			errors = checkingParameters(lastNameParam, firstNameParam, dobParam, usernameParam,
 					passwordParam1, passwordParam2, errors);
 			if (!checkErrors(errors)) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dateOfBirthParam = LocalDate.parse(dob, formatter);
+				LocalDate dateOfBirthParam = LocalDate.parse(dobParam, formatter);
 				Customer customer = new Customer(0,firstNameParam, lastNameParam, dateOfBirthParam, usernameParam, passwordParam1);
 				if(customer.insert())
 				{
@@ -76,7 +76,7 @@ public class Register extends HttpServlet {
 				}
 				else
 				{
-					System.out.println("Erreur inscription");
+					
 				}
 
 			}else {
