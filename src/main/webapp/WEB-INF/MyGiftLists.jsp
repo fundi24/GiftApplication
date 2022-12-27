@@ -15,9 +15,6 @@
 	<%@ include file="Header.jsp"%>
 	<% giftLists = (ArrayList<ListGift>)request.getAttribute("giftLists"); %>
 
-	
-	<% for(ListGift l : giftLists){ %>
-	
 	<table class="table">
 	<tr>
 		<th>Nom</th>
@@ -26,6 +23,8 @@
 		<th>Statut</th>
 		<th></th>
 	</tr>
+	<% for(ListGift l : giftLists){ %>
+	
 	<tr>
 		<td><%= l.getName() %></td>
 		<td><%= l.getTheme() %></td>
@@ -43,12 +42,11 @@
 		<form action="consultlistgift" method="get"> 
 			<input type="hidden" name="idListGift" 
 				value="<%= l.getIdListGift() %>" />
-			<td><button type="submit" name="ConsultList" value="Consult" class = "btn btn-primary btn-sm">Consulter</button></td>
+			<td><button type="submit" name="ConsultListBtn" value="ConsultList" class = "btn btn-primary btn-sm">Consulter</button></td>
 		</form>
 	</tr>
-	</table>
 	<%} %>
-
+	</table>
 
 	<a href="createlistgift" class="btn btn-primary btn-sm active">Ajouter liste</a>
 

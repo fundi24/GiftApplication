@@ -131,9 +131,21 @@ public class ListGift implements Serializable {
 		return listGiftDAO.findAll(customer);
 	}
 	
+
+	
+	public boolean getListGiftGifts() {
+		gifts = Gift.getGiftsFromListGift(this);
+		if(gifts != null) {
+			return true;
+		}
+		return false;
+	}
+	
+
 	public boolean insert() {
 		return listGiftDAO.create(this);
 	}
+
 
 
 

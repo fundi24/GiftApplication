@@ -1,9 +1,17 @@
 package be.giftapplication.dao;
 
+import java.awt.Image;
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.ws.rs.core.MediaType;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import be.giftapplication.javabeans.Gift;
+import be.giftapplication.javabeans.ListGift;
 
 public class GiftDAO extends DAO<Gift> {
 
@@ -32,7 +40,40 @@ public class GiftDAO extends DAO<Gift> {
 
 	@Override
 	public ArrayList<Gift> findAll(Object obj) {
-		return null;
+		ListGift listGift = null;
+		if(obj instanceof ListGift) {
+			listGift = (ListGift) obj;
+		}
+		ArrayList<Gift> gifts = new ArrayList<>();
+		String APIResponse = this.resource.path("gift").path("listgift").path(String.valueOf(listGift.getIdListGift())).accept(MediaType.APPLICATION_JSON).get(String.class);
+		
+		if(APIResponse != null) {
+			JSONArray array = new JSONArray(APIResponse);
+			
+			try {
+				
+				for(int i=0; i < array.length(); i++) {
+					
+					JSONObject objJson = array.getJSONObject(i);
+					int idGift = objJson.getInt("idGift");
+					String name = objJson.getString("name");
+					String description = objJson.getString("description");
+					//Image img =
+					double price = objJson.getDouble("price");
+					int priority = objJson.getInt("priority");
+					boolean booked = objJson.getBoolean("booked");
+					boolean multiplePayment = objJson.getBoolean("multiplePayment");
+					String linkToWebsite = objJson.getString("linkToWebsite");
+					
+					Gift gift = new Gift(idGift, name, description, price, priority, booked, multiplePayment, linkToWebsite, listGift);
+					gifts.add(gift);
+				}
+			}
+			catch(Exception e)	{
+				System.out.println(e.getMessage());
+			}	
+		}
+		return gifts;
 	}
 
 }

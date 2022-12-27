@@ -16,12 +16,12 @@
         %>
         <div class="mb-3">
             <label for="username" class="form-label">Nom d'utilisateur</label>
-             <input type="text" class="form-control" name="username" id="username" required>
+             <input type="text" class="form-control" name="username" id="username">
             <div class="form-text"><%=errors.get(0)%></div>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Mot de passe</label> 
-            <input type="password" class="form-control" name="password" id="password" required>
+            <input type="password" class="form-control" name="password" id="password">
             <div class="form-text"><%=errors.get(1)%></div>
         </div>
         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
@@ -35,6 +35,6 @@
         }
     %>
     <a href="register" class="btn btn-primary btn-sm active">Inscription</a>
-
+	
 </body>
 </html>

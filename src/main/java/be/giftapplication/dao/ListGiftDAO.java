@@ -78,7 +78,6 @@ public class ListGiftDAO extends DAO<ListGift> {
 					boolean status = objJson.getBoolean("status");
 					String theme = objJson.getString("theme");
 					ListGift listGift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, customer);
-					
 					giftLists.add(listGift);
 				}
 			}
