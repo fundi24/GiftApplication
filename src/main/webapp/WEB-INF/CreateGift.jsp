@@ -10,10 +10,10 @@
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
-	<form action="creategift" method="POST">
+	<form action="creategift" method="POST" enctype="multipart/form-data">
 		<%
 		errors = (ArrayList<String>) request.getAttribute("errors");
-		/* int idListGift = Integer.parseInt((String)request.getAttribute("idListGift")); */
+		
 		
 		%>
 		<div class="mb-3">
@@ -40,6 +40,9 @@
 			<label for="linkToWebsite" class="form-label">Lien vers le site(Optionnelle)</label> 
 			<input type="text" class="form-control" name="linkToWebsite" id="linkToWebsite">
 		</div>
+		<div>
+			<input type="hidden" name="idListGift" value="<%= request.getAttribute("idListGift")%>" />
+		</div> 
 		<button type="submit" name="submit" id="submit"
 			class="btn btn-primary">Envoyer</button>
 

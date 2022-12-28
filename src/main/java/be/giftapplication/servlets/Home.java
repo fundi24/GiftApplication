@@ -47,7 +47,7 @@ public class Home extends HttpServlet {
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<String> errors = new ArrayList<>();
+    	ArrayList<String> errors = new ArrayList<>();
         for(int i=0; i<2; i++)
         {
         	errors.add("");
@@ -79,7 +79,8 @@ public class Home extends HttpServlet {
 
             }
             else {
-
+            	request.setAttribute("usernameSave", username);
+            	request.setAttribute("passwordSave", password);
                 request.setAttribute("errors", errors);
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/Home.jsp");
                 dispatcher.forward(request, response);

@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%!ArrayList<String> errors = new ArrayList<>();%>
-<%!String usernameSave = ""; %>
-<%!String passwordSave = ""; %>
+<%!String usernameSave= ""; %>
+<%!String passwordSave= ""; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,13 +12,14 @@
 </head>
 <body>
      <%@ include file="Header.jsp"%>
+     <h2>Connexion</h2>
     <form action="home" method="POST">
         <%
             errors = (ArrayList<String>) request.getAttribute("errors");
         	if(request.getAttribute("usernameSave") != null){
         		usernameSave = (String) request.getAttribute("usernameSave");
         	}
-        	if(request.getAttribute("passwordSave") != null){
+        	if(request.getAttribute("passwordSave") !=null){
         		passwordSave = (String) request.getAttribute("passwordSave");
         	}
         	

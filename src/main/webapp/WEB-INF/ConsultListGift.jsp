@@ -24,6 +24,8 @@
 			<th>Prix</th>
 			<th>Priorité</th>
 			<th>Status</th>
+			<th></th>
+			<th></th>
 		</tr>
 	<%if(listgift.getGifts().size() > 0){ %>
 	
@@ -53,7 +55,9 @@
 		
 	<%} %>
 	</table>
-	<div class="row g-3">
+	
+	
+	<div class="row g-3 m-2">
 		<div class="col-auto">
 			<form action="creategift" method="get"> 
 				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
@@ -80,7 +84,13 @@
 		</div>
 	</div>
 	
-	<div class="mt-1" ><a href="mygiftlists" class="btn btn-primary btn-sm active">Retour</a></div>
+	<div class="input-group m-2 ">
+	    <span class="input-group-text" id="basic-addon3">Lien</span>
+	    <input type="text" class="form-control"  value="http://GiftApplication" aria-describedby="basic-addon3" readonly>
+  	</div>
+	
+	
+	<div class="m-2" ><a href="mygiftlists" class="btn btn-primary btn-sm active">Retour</a></div>
 	
 </body>
 </html>
