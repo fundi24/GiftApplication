@@ -17,12 +17,12 @@ public class ListGift implements Serializable {
 	private boolean status;
 	private String theme;
 	private Customer owner;
-	private ArrayList<Customer> participants;
+	private ArrayList<Customer> invitations;
 	private ArrayList<Gift> gifts;
 	
 	public ListGift()
 	{
-		participants = new ArrayList<>();
+		invitations = new ArrayList<>();
 		gifts = new ArrayList<>();
 	}
 	
@@ -35,7 +35,7 @@ public class ListGift implements Serializable {
 		this.status = status;
 		this.theme = theme;
 		this.owner = owner;
-		participants = new ArrayList<>();
+		invitations = new ArrayList<>();
 		gifts = new ArrayList<>();
 	}
 
@@ -90,12 +90,12 @@ public class ListGift implements Serializable {
 		this.owner = owner;
 	}
 
-	public ArrayList<Customer> getParticipants() {
-		return participants;
+	public ArrayList<Customer> getInvitations() {
+		return invitations;
 	}
 
-	public void setParticipants(ArrayList<Customer> participants) {
-		this.participants = participants;
+	public void setInvitations(ArrayList<Customer> invitations) {
+		this.invitations = invitations;
 	}
 
 	public ArrayList<Gift> getGifts() {
@@ -108,13 +108,13 @@ public class ListGift implements Serializable {
 	
 	//Add and remove for lists
     
-    public void addParticipant(Customer participant) {
-		participants.add(participant);
+    public void addInvitation(Customer customer) {
+    	invitations.add(customer);
 	}
 	
     
-    public void removeParticipant(Customer participant) {
-		participants.remove(participant);
+    public void removeInvitation(Customer customer) {
+    	invitations.remove(customer);
 	}
     
     public void addGift(Gift gift) {
@@ -152,8 +152,9 @@ public class ListGift implements Serializable {
 	@Override
 	public String toString() {
 		return "ListGift [idListGift=" + idListGift + ", name=" + name + ", deadline=" + deadline + ", status=" + status
-				+ ", theme=" + theme + ", owner=" + owner + ", participants=" + participants + ", gifts=" + gifts + "]";
+				+ ", theme=" + theme + ", owner=" + owner + ", invitations=" + invitations + ", gifts=" + gifts + "]";
 	}
+	
 	
 	
 }

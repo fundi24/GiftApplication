@@ -10,6 +10,8 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.sun.jersey.api.client.ClientResponse;
+
 import be.giftapplication.javabeans.Gift;
 import be.giftapplication.javabeans.ListGift;
 
@@ -20,6 +22,17 @@ public class GiftDAO extends DAO<Gift> {
 
 	@Override
 	public boolean create(Gift obj) {
+		ClientResponse res;
+		try {
+			res = this.resource.path("gift").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, mapper.writeValueAsString(obj));
+			int httpResponseCode = res.getStatus();
+			if (httpResponseCode == 201) {
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return false;
+		}
 		return false;
 	}
 

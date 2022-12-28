@@ -17,10 +17,10 @@ public class Gift implements Serializable {
 	private String description;
 	private double price;
 	private int priority;
-	private Image picture;
+	private String picture;
 	private boolean booked;
 	private boolean multiplePayment;
-	private String linkToWebstite;
+	private String linkToWebsite;
 	private ListGift listGift;
 	private ArrayList<Participation> participations;
 	
@@ -30,9 +30,8 @@ public class Gift implements Serializable {
 	}
 
 	
-
 	public Gift(int idGift, String name, String description,  double price, int priority, boolean booked,
-			boolean multiplePayment, String linkToWebstite, ListGift listGift) {
+			boolean multiplePayment, String linkToWebsite, ListGift listGift) {
 		
 		this.idGift = idGift;
 		this.name = name;
@@ -41,7 +40,7 @@ public class Gift implements Serializable {
 		this.priority = priority;
 		this.booked = booked;
 		this.multiplePayment = multiplePayment;
-		this.linkToWebstite = linkToWebstite;
+		this.linkToWebsite = linkToWebsite;
 		this.listGift = listGift;
 		participations = new ArrayList<>();
 	}
@@ -91,11 +90,11 @@ public class Gift implements Serializable {
 		this.priority = priority;
 	}
 	
-	public Image getPicture() {
+	public String getPicture() {
 		return picture;
 	}
 
-	public void setPicture(Image picture) {
+	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 
@@ -116,12 +115,12 @@ public class Gift implements Serializable {
 		this.multiplePayment = multiplePayment;
 	}
 
-	public String getLinkToWebstite() {
-		return linkToWebstite;
+	public String getLinkToWebsite() {
+		return linkToWebsite;
 	}
 
-	public void setLinkToWebstite(String linkToWebstite) {
-		this.linkToWebstite = linkToWebstite;
+	public void setLinkToWebsite(String linkToWebsite) {
+		this.linkToWebsite = linkToWebsite;
 	}
 
 	public ListGift getListGift() {
@@ -154,6 +153,10 @@ public class Gift implements Serializable {
 	
 	public static ArrayList<Gift> getGiftsFromListGift(ListGift listGift) {
 		return giftDAO.findAll(listGift);
+	}
+	
+	public boolean insert() {
+		return giftDAO.create(this);
 	}
 	
 	

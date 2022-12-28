@@ -29,7 +29,7 @@
             <input type="text" class="form-control" name="theme" id="theme">
             <div class="form-text"><%=errors.get(2)%></div>
         </div>
-        <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="submit" id="submit" class="btn btn-primary">Envoyer</button>
 
     </form>
 	<%
@@ -48,7 +48,10 @@
         <% 
         }
     %>
-    <a href="mygiftlists" class="btn btn-primary btn-sm active">Retour</a>
+    <div class="mt-1">
+    	<a href="mygiftlists" class="btn btn-primary btn-sm active">Retour</a>
+    </div>
+    
 
 </body>
 </html>
