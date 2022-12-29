@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.sun.jersey.api.client.ClientResponse;
+
 import be.giftapplication.javabeans.Customer;
 import be.giftapplication.javabeans.ListGift;
 import be.giftapplication.javabeans.Notification;
@@ -30,7 +32,25 @@ public class NotificationDAO extends DAO<Notification> {
 
 	@Override
 	public boolean update(Notification obj) {
-		return false;
+		boolean success = false;
+		Notification notification = null;
+		if(obj instanceof Notification) {
+			notification = (Notification) obj;
+		}
+		
+		ClientResponse res;
+		try {
+			res = this.resource.path("notification").path(String.valueOf(notification.getIdNotification())).header("Content-Type",
+		            "application/json;charset=UTF-8").put(ClientResponse.class, mapper.writeValueAsString(notification));
+			int httpResponseCode = res.getStatus();
+			if (httpResponseCode == 204) {
+				success = true;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return success;
 	}
 
 	@Override

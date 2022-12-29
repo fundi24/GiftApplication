@@ -24,16 +24,23 @@
 	
 	<tr>
 		<td><%= n.getMessage() %></td>
+		
 		<%if(n.isRead() == true){ %>
 			<td>lu</td>
 		<%} else{ %>
 			<td>pas lu</td>
 		<%} %>
-		<%-- <form action="consultlistgift" method="get"> 
-			<input type="hidden" name="idListGift" 
-				value="<%= l.getIdListGift() %>" />
-			<td><button type="submit" class = "btn btn-primary btn-sm">Consulter</button></td>
-		</form> --%>
+		
+		<%if(n.isRead() == true){ %>
+			<td></td>
+		<%} else{ %>
+			<td><form action="mynotifications" method="post"> 
+			<input type="hidden" name="idNotification" 
+				value="<%= n.getIdNotification() %>" />
+			<button type="submit" class = "btn btn-primary btn-sm">Lire</button>
+		</form></td>
+		<%} %>
+		
 	</tr>
 	<%} %>
 	</table>
