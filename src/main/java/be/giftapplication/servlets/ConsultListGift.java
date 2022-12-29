@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import be.giftapplication.javabeans.Customer;
+import be.giftapplication.javabeans.Gift;
 import be.giftapplication.javabeans.ListGift;
 
 /**
@@ -35,13 +36,27 @@ public class ConsultListGift extends HttpServlet {
 		int idListGift = Integer.parseInt(request.getParameter("idListGift"));
 		HttpSession session = request.getSession(false);
 		Customer customer = (Customer) session.getAttribute("customer");
-		ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+		session.setAttribute("idListGift", idListGift);
+		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 		//! A RELIRE !
-		boolean receipt = listGift.getListGiftGifts();
+		boolean receipt = listgift.getListGiftGifts();
 		if(receipt) {
 			session.setAttribute("customer", customer);
 		}
-		request.setAttribute("listgift", listGift);
+		request.setAttribute("listgift", listgift);
+		
+		boolean canModifyPriority = true;
+		for(int i=0; i < listgift.getGifts().size() && canModifyPriority == true; i++) {
+			Gift g = listgift.getGifts().get(i);
+			if(g.isBooked()) {
+				canModifyPriority = false;
+				request.setAttribute("canModifyPriorityError", "Un ou plusieurs cadeaux de votre liste est déjà réservé.");
+				
+			}
+		}
+		
+	
+		
 		getServletContext().getRequestDispatcher("/WEB-INF/ConsultListGift.jsp").forward(request, response);
 		
 	}

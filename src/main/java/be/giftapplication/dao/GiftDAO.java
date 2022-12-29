@@ -71,14 +71,14 @@ public class GiftDAO extends DAO<Gift> {
 					int idGift = objJson.getInt("idGift");
 					String name = objJson.getString("name");
 					String description = objJson.getString("description");
-					//Image img =
+					String picture = objJson.getString("picture");
 					double price = objJson.getDouble("price");
 					int priority = objJson.getInt("priority");
 					boolean booked = objJson.getBoolean("booked");
 					boolean multiplePayment = objJson.getBoolean("multiplePayment");
 					String linkToWebsite = objJson.getString("linkToWebsite");
 					
-					Gift gift = new Gift(idGift, name, description, price, priority, booked, multiplePayment, linkToWebsite, listGift);
+					Gift gift = new Gift(idGift, name, description, price, priority, picture, booked, multiplePayment, linkToWebsite, listGift);
 					gifts.add(gift);
 				}
 			}

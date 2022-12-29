@@ -30,7 +30,7 @@ public class Gift implements Serializable {
 	}
 
 	
-	public Gift(int idGift, String name, String description,  double price, int priority, boolean booked,
+	public Gift(int idGift, String name, String description,  double price, int priority,String picture, boolean booked,
 			boolean multiplePayment, String linkToWebsite, ListGift listGift) {
 		
 		this.idGift = idGift;
@@ -38,6 +38,7 @@ public class Gift implements Serializable {
 		this.description = description;
 		this.price = price;
 		this.priority = priority;
+		this.picture = picture;
 		this.booked = booked;
 		this.multiplePayment = multiplePayment;
 		this.linkToWebsite = linkToWebsite;

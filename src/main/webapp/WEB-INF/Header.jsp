@@ -1,7 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" session="true"%>
  <%@page import="be.giftapplication.javabeans.Customer" %>
- <jsp:useBean id="idCustomer" class="be.giftapplication.javabeans.Customer" scope="session"></jsp:useBean>
+ <jsp:useBean id="customer" class="be.giftapplication.javabeans.Customer" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +19,11 @@
             <a class="navbar-brand">WishList</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<% if(session.getAttribute("customer") != null){ %>
-                    <li class="nav-item"><a class="nav-link" href="mygiftlists">Mes listes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="">Mes notifications</a></li>
-                    <li class="nav-item"><a class="nav-link" href="home">Déconnexion</a></li><%} %>
+					<% if(customer.getIdCustomer() != 0){ %>
+	                    <li class="nav-item"><a class="nav-link" href="mygiftlists">Mes listes</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="">Mes notifications</a></li>
+	                    <li class="nav-item"><a class="nav-link" href="home">Déconnexion</a></li>
+                    <%} %>
                     
                 </ul>
                 <!-- <form class="d-flex">

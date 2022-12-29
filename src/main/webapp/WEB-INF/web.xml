@@ -13,6 +13,8 @@
     <servlet-name>CreateListGift</servlet-name>
     <servlet-name>ConsultListGift</servlet-name>
     <servlet-name>CreateGift</servlet-name>
+    <servlet-name>ConsultGift</servlet-name>
+    <servlet-name>ModifyPriority</servlet-name>
   </filter-mapping>
   
   <welcome-file-list>
@@ -54,6 +56,15 @@
   	<servlet-class>be.giftapplication.servlets.CreateGift</servlet-class>
   </servlet>
   
+  <servlet>
+  	<servlet-name>ConsultGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ConsultGift</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>ModifyPriority</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ModifyPriority</servlet-class>
+  </servlet>
   
   
   <servlet-mapping>
@@ -65,32 +76,37 @@
    <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/register</url-pattern>
-  	<url-pattern>/inscription</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
   	<servlet-name>MyGiftLists</servlet-name>
   	<url-pattern>/mygiftlists</url-pattern>
-  	<url-pattern>/meslistes</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
   	<servlet-name>ConsultListGift</servlet-name>
   	<url-pattern>/consultlistgift</url-pattern>
-  	<url-pattern>/consulterlistecadeaux</url-pattern>
   </servlet-mapping>
   
    <servlet-mapping>
   	<servlet-name>CreateListGift</servlet-name>
   	<url-pattern>/createlistgift</url-pattern>
-  	<url-pattern>/creerlistecadeaux</url-pattern>
   </servlet-mapping>
   
   
    <servlet-mapping>
   	<servlet-name>CreateGift</servlet-name>
   	<url-pattern>/creategift</url-pattern>
-  	<url-pattern>/creercadeaux</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>ConsultGift</servlet-name>
+  	<url-pattern>/consultgift</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>ModifyPriority</servlet-name>
+  	<url-pattern>/modifypriority</url-pattern>
   </servlet-mapping>
   
   
