@@ -79,8 +79,7 @@ public class CreateGift extends HttpServlet {
 				//Get Customer from session and get idListGift from request
 				HttpSession session = request.getSession(false);
 				Customer customer = (Customer) session.getAttribute("customer");
-				int idListGift = Integer.parseInt((String)request.getParameter("idListGift"));
-				
+				int idListGift = (int) session.getAttribute("idListGift");				
 				//Find listgift from the giftlists of the customer with the id
 				ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 				int priority = listGift.getGifts().size() + 1;

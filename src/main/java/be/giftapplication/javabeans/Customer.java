@@ -178,6 +178,14 @@ public class Customer implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean getCustomerNotifications() {
+		notifications = Notification.getNotificationFromCustomer(this);
+		if(notifications.size() > 0) {
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public String toString() {
 		return "Customer [idCustomer=" + idCustomer + ", firstName=" + firstName + ", lastName=" + lastName
