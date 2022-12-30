@@ -53,13 +53,18 @@
   </servlet>
   
   <servlet>
-  	<servlet-name>CreateGift</servlet-name>
-  	<servlet-class>be.giftapplication.servlets.CreateGift</servlet-class>
+  	<servlet-name>MyNotifications</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.MyNotifications</servlet-class>
   </servlet>
   
   <servlet>
   	<servlet-name>ConsultGift</servlet-name>
   	<servlet-class>be.giftapplication.servlets.ConsultGift</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>CreateGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.CreateGift</servlet-class>
   </servlet>
   
    <servlet>
@@ -78,7 +83,7 @@
   	<servlet-class>be.giftapplication.servlets.ConsultInvitations</servlet-class>
   </servlet>
   
-  
+
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
   	<url-pattern>/home</url-pattern>
@@ -105,10 +110,14 @@
   	<url-pattern>/createlistgift</url-pattern>
   </servlet-mapping>
   
-  
    <servlet-mapping>
   	<servlet-name>CreateGift</servlet-name>
   	<url-pattern>/creategift</url-pattern>
+   </servlet-mapping>
+   
+   <servlet-mapping>
+  	<servlet-name>MyNotifications</servlet-name>
+  	<url-pattern>/mynotifications</url-pattern>
   </servlet-mapping>
   
   <servlet-mapping>
@@ -131,9 +140,6 @@
   	<servlet-name>ConsultInvitations</servlet-name>
   	<url-pattern>/consultinvitations</url-pattern>
   </servlet-mapping>
-  
-  
-  
   
   
   

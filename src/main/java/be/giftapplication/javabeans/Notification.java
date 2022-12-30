@@ -1,11 +1,16 @@
 package be.giftapplication.javabeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import be.giftapplication.dao.DAO;
+import be.giftapplication.dao.NotificationDAO;
 
 
 
 public class Notification implements Serializable {
 	private static final long serialVersionUID = 3306630235932605381L;
+	private static final DAO<Notification> notificationDAO = new NotificationDAO();
 	private int idNotification;
 	private String message;
 	private boolean read;
@@ -58,5 +63,20 @@ public class Notification implements Serializable {
 	}
 	
 	//Call to DAO
+	public static ArrayList<Notification> getNotificationFromCustomer(Customer customer) {
+		
+		return notificationDAO.findAll(customer);
+	}
+	
+	public boolean update() {
+		return notificationDAO.update(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Notification [idNotification=" + idNotification + ", message=" + message + ", read=" + read
+				+ ", customer=" + customer + "]";
+	}
+	
 	
 }
