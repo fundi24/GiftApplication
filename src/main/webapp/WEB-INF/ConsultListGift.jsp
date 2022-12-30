@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="be.giftapplication.javabeans.ListGift"%>
 <%@page import="be.giftapplication.javabeans.Gift"%>
+<%@page import="java.time.LocalDate"%>
 <jsp:useBean id="listgift" class="be.giftapplication.javabeans.ListGift" scope="request"></jsp:useBean>
 <!DOCTYPE html>
 <html>
@@ -76,9 +77,13 @@
 			</form>
 		</div>
 		<div class="col-auto">
-			<form action="modifystatuslist" method="get"> 
+			<form action="consultlistgift" method="post"> 
 				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
+				<% if(listgift.getDeadline().equals(LocalDate.of(1000, 1, 1))){ %>
 				<td><button type="submit" class = "btn btn-primary btn-sm">Activer/Désactiver</button></td>
+				<% } else {%> 
+				<td><button type="submit" class = "btn btn-primary btn-sm" disabled>Activer/Désactiver</button></td>
+				<% } %>
 			</form>
 		</div>
 		<div class="col-auto">

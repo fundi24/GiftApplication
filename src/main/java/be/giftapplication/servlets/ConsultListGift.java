@@ -67,7 +67,17 @@ public class ConsultListGift extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		HttpSession session = request.getSession(false);
+		Customer customer = (Customer) session.getAttribute("customer");
+		int idListGift = (int) session.getAttribute("idListGift");
+		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+		ListGift listGiftWithoutOwner = new ListGift();
+		listGiftWithoutOwner.setIdListGift(idListGift);
+		listGiftWithoutOwner.setStatus(listgift.isStatus());
+		boolean result = listGiftWithoutOwner.update();
+		if(result) {
+			response.sendRedirect("mygiftlists");
+		}
 	}
 
 }

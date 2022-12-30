@@ -84,6 +84,7 @@
   </servlet>
   
 
+
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
   	<url-pattern>/home</url-pattern>
@@ -140,6 +141,7 @@
   	<servlet-name>ConsultInvitations</servlet-name>
   	<url-pattern>/consultinvitations</url-pattern>
   </servlet-mapping>
+  
   
   
   
