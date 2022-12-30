@@ -160,5 +160,28 @@ public class Gift implements Serializable {
 		return giftDAO.create(this);
 	}
 	
+	public boolean update(Gift giftWithoutList) {
+		//send to dao the owner without his lists
+		boolean success = giftDAO.update(giftWithoutList);
+		if(success) {
+			this.name = giftWithoutList.getName();
+			this.description = giftWithoutList.getDescription();
+			this.price = giftWithoutList.getPrice();
+			this.picture = giftWithoutList.getPicture();
+			this.linkToWebsite = giftWithoutList.getLinkToWebsite();
+		}
+		
+		return success;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Gift [idGift=" + idGift + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", priority=" + priority + ", picture=" + picture + ", booked=" + booked + ", multiplePayment="
+				+ multiplePayment + ", linkToWebsite=" + linkToWebsite +  "]";
+	}
+	
+	
 	
 }

@@ -13,9 +13,11 @@
     <servlet-name>CreateListGift</servlet-name>
     <servlet-name>ConsultListGift</servlet-name>
     <servlet-name>CreateGift</servlet-name>
+    <servlet-name>ModifyGift</servlet-name>
     <servlet-name>ConsultGift</servlet-name>
     <servlet-name>ModifyPriority</servlet-name>
     <servlet-name>ConsultInvitations</servlet-name>
+    <servlet-name>MyNotifications</servlet-name>
   </filter-mapping>
   
   <welcome-file-list>

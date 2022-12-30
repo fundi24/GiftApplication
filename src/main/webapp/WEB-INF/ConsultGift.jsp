@@ -18,7 +18,7 @@
 	booked = gift.isBooked() ? "Réservé" : "Non réservé";
 	multiplePayment = gift.isMultiplePayment() ? "Oui" : "Non";
 
-	if (gift.getLinkToWebsite().equals(null)) {
+	if (!gift.getLinkToWebsite().equals(null)) {
 		link = gift.getLinkToWebsite();
 	}
 	%>
@@ -43,7 +43,6 @@
 			<p class="card-text">
 				Paiement Multiple :
 				<%=multiplePayment%></p>
-			<%-- <p class="card-text"> Somme payée : <%=  %></p> --%>
 			<p class="card-text">
 				Lien :
 				<%=link%></p>
@@ -69,6 +68,14 @@
 		<%
 		}
 		%>
+	</div>
+	
+	<div class="mt-1">
+		<form action="consultlistgift" method="get"> 
+			<input type="hidden" name="idListGift" 
+				value="<%= request.getAttribute("idListGift")%>" />
+			<td><button type="submit" class = "btn btn-primary btn-sm">Retour</button></td>
+		</form>
 	</div>
 
 </body>

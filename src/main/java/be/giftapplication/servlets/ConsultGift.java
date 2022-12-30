@@ -46,6 +46,7 @@ public class ConsultGift extends HttpServlet {
 		int idGift = Integer.parseInt(request.getParameter("idGift"));
 		ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 		Gift gift = listGift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
+		
 		request.setAttribute("gift", gift);
 		
 		//GESTION IMAGE !!
@@ -54,6 +55,7 @@ public class ConsultGift extends HttpServlet {
 	    //String base64Image = Base64.getEncoder().encodeToString(gift.getPicture().getBytes());
 	  //request.setAttribute("imageAsBase64", base64Image);
 		
+		request.setAttribute("idListGift", idListGift);
 		getServletContext().getRequestDispatcher("/WEB-INF/ConsultGift.jsp").forward(request, response);
 	}
 

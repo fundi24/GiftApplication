@@ -62,6 +62,7 @@ public class CreateGift extends HttpServlet {
 		ArrayList<String> errors = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
 			errors.add("");
+			
 		}
 		String nameParam = request.getParameter("name");
 		String descriptionParam = request.getParameter("description");
@@ -71,16 +72,17 @@ public class CreateGift extends HttpServlet {
 		String picture = new String(arrayBytes, StandardCharsets.UTF_8);
 		String linkToWebsiteParam = request.getParameter("linkToWebsite");
 		
+		HttpSession session = request.getSession(false);
+		Customer customer = (Customer) session.getAttribute("customer");
+		int idListGift = (int) session.getAttribute("idListGift");
+		
 		
 		if (request.getParameter("submit") != null) {
 			errors = checkingParameters(nameParam, descriptionParam, strPriceParam,linkToWebsiteParam ,errors);
 			if (!checkErrors(errors)) {
 				double priceParam = Double.parseDouble(strPriceParam);
 				//Get Customer from session and get idListGift from request
-				HttpSession session = request.getSession(false);
-				Customer customer = (Customer) session.getAttribute("customer");
-
-				int idListGift = (int) session.getAttribute("idListGift");
+				
 
 				//Find listgift from the giftlists of the customer with the id
 				ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
@@ -94,17 +96,20 @@ public class CreateGift extends HttpServlet {
 				
 				if(gift.insert()) {
 					request.setAttribute("createGiftSuccess", "Création du cadeau réussite.");
+					request.setAttribute("idListGift", idListGift);
 					request.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
 				}
 				else {
 					request.setAttribute("createGiftError", "Erreur dans la création du cadeau.");
+					request.setAttribute("idListGift", idListGift);
                 	request.setAttribute("errors", errors);
                 	getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
 				}
 			}
 			else {
             	request.setAttribute("errors", errors);
+            	request.setAttribute("idListGift", idListGift);
             	getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
 			}
 		}
