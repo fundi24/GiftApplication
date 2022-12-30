@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import be.giftapplication.javabeans.Customer;
 import be.giftapplication.javabeans.ListGift;
+import be.giftapplication.javabeans.Notification;
 
 public class ListGiftDAO extends DAO<ListGift> {
 
@@ -42,7 +43,25 @@ public class ListGiftDAO extends DAO<ListGift> {
 
 	@Override
 	public boolean update(ListGift obj) {
-		return false;
+		boolean success = false;
+		ListGift listGift = null;
+		if(obj instanceof ListGift) {
+			listGift = (ListGift) obj;
+		}
+		
+		ClientResponse res;
+		try {
+			res = this.resource.path("listgift").path(String.valueOf(listGift.getIdListGift())).header("Content-Type",
+		            "application/json;charset=UTF-8").put(ClientResponse.class, mapper.writeValueAsString(listGift));
+			int httpResponseCode = res.getStatus();
+			if (httpResponseCode == 204) {
+				success = true;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		return success;
 	}
 
 	@Override
