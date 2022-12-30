@@ -35,6 +35,7 @@ public class ConsultListGift extends HttpServlet {
 		int idListGift = Integer.parseInt(request.getParameter("idListGift"));
 		HttpSession session = request.getSession(false);
 		Customer customer = (Customer) session.getAttribute("customer");
+		session.setAttribute("idListGift", idListGift);
 		ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 		//! A RELIRE !
 		boolean receipt = listGift.getListGiftGifts();
