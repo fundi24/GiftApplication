@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="true"%>
 <%@page import="be.giftapplication.javabeans.Customer"%>
@@ -28,25 +27,13 @@
 							listes</a></li>
 					<li class="nav-item"><a class="nav-link" href="mynotifications">Mes
 							notifications</a></li>
-<%-- 					<li class="nav-item">
-						<form action="mynotifications" method="get">
-							<input type="hidden" name="idCustomer"
-								value="<%=customer.getIdCustomer()%>" />
-							<td><button type="submit" class="btn btn-link nav-link">Mes
-									notifications</button></td>
-						</form>
-					</li> --%>
+
 					<li class="nav-item"><a class="nav-link" href="home">Déconnexion</a></li>
 					<%
 					}
 					%>
 
 				</ul>
-				<!-- <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form> -->
 			</div>
 		</div>
 	</nav>

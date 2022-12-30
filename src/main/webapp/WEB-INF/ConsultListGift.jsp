@@ -64,10 +64,15 @@
 				<td><button type="submit" class = "btn btn-primary btn-sm">Ajouter cadeau</button></td>
 			</form>
 		</div>
+		
 		<div class="col-auto">
 			<form action="modifypriority" method="get"> 
 				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
-				<td><button type="submit" class = "btn btn-primary btn-sm">Modifier priorité</button></td>
+				<% if(request.getAttribute("canModifyPriorityError") == null){ %>
+					<td><button type="submit" class = "btn btn-primary btn-sm">Modifier priorité</button></td>
+				<% } else {%> 
+					<td><button type="submit" class = "btn btn-primary btn-sm" disabled>Modifier priorité</button></td>
+				<% } %>
 			</form>
 		</div>
 		<div class="col-auto">
@@ -90,7 +95,7 @@
   	</div>
 	
 	
-	<div class="m-2" ><a href="mygiftlists" class="btn btn-primary btn-sm active">Retour</a></div>
+	<div class="m-2" ><a href="mygiftlists" class="btn btn-primary btn-sm">Retour</a></div>
 	
 </body>
 </html>
