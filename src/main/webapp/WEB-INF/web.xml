@@ -15,6 +15,7 @@
     <servlet-name>CreateGift</servlet-name>
     <servlet-name>ConsultGift</servlet-name>
     <servlet-name>ModifyPriority</servlet-name>
+    <servlet-name>ConsultInvitations</servlet-name>
   </filter-mapping>
   
   <welcome-file-list>
@@ -61,9 +62,20 @@
   	<servlet-class>be.giftapplication.servlets.ConsultGift</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>ModifyGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ModifyGift</servlet-class>
+  </servlet>
+  
+  
   <servlet>
   	<servlet-name>ModifyPriority</servlet-name>
   	<servlet-class>be.giftapplication.servlets.ModifyPriority</servlet-class>
+  </servlet>
+  
+   <servlet>
+  	<servlet-name>ConsultInvitations</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ConsultInvitations</servlet-class>
   </servlet>
   
   
@@ -104,10 +116,25 @@
   	<url-pattern>/consultgift</url-pattern>
   </servlet-mapping>
   
+   <servlet-mapping>
+  	<servlet-name>ModifyGift</servlet-name>
+  	<url-pattern>/modifygift</url-pattern>
+  </servlet-mapping>
+  
   <servlet-mapping>
   	<servlet-name>ModifyPriority</servlet-name>
   	<url-pattern>/modifypriority</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet-mapping>
+  	<servlet-name>ConsultInvitations</servlet-name>
+  	<url-pattern>/consultinvitations</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
   
   
 </web-app>

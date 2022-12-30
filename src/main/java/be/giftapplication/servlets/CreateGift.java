@@ -80,8 +80,6 @@ public class CreateGift extends HttpServlet {
 				HttpSession session = request.getSession(false);
 				Customer customer = (Customer) session.getAttribute("customer");
 				int idListGift = (int) session.getAttribute("idListGift");
-				System.out.println(idListGift + " test ");
-				//int idListGift = Integer.parseInt((String)request.getParameter("idListGift"));
 				
 				//Find listgift from the giftlists of the customer with the id
 				ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
@@ -129,7 +127,7 @@ public class CreateGift extends HttpServlet {
 			errors.add(2, "Le champ [prix] est vide.");
 		}
 			
-		//Picture et Link ??
+		//Link ??
 		
 
 		return errors;

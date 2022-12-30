@@ -62,12 +62,15 @@ public class ModifyPriority extends HttpServlet {
 		int[] selectedPriority = new int[listgift.getGifts().size()];
 		for(int i=0; i < selectedPriority.length; i++) {
 			selectedPriority[i] = Integer.parseInt(request.getParameter("priority-select-" + i));
-			System.out.println(selectedPriority[i]);
+			
 		}
 		
 		errors = checkSelectedPriority(selectedPriority, listgift.getGifts());
 		if(errors.size() == 0) {
-			
+			boolean updateSuccess;
+			for(Gift gift : listgift.getGifts()) {
+				
+			}
 		}
 		else {
 			request.setAttribute("errors", errors);
@@ -96,7 +99,6 @@ public class ModifyPriority extends HttpServlet {
 		//Check if there isn't more than the same priority once
 		 List<Integer> list = Arrays.stream(selectedPriority).boxed().collect(Collectors.toList());
 		 Set<Integer> set = new HashSet<>(list);
-		 System.out.println(set.size());
 		if(selectedPriority.length != set.size()) {
 			errors.add("Chaque cadeau doit possèder une priorité différente");
 		}

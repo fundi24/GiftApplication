@@ -63,7 +63,6 @@ public class ListGiftDAO extends DAO<ListGift> {
 		if(APIResponse != null) {
 			JSONArray array = new JSONArray(APIResponse);
 			
-			
 			try {
 				
 				for(int i=0; i < array.length(); i++) {
@@ -90,4 +89,41 @@ public class ListGiftDAO extends DAO<ListGift> {
 		return giftLists;
 	}
 
+	public ArrayList<Customer> getInvitations(ListGift obj){
+		ArrayList<Customer> customers = new ArrayList<>();
+		
+		String APIResponse = this.resource.path("listgift").path("invitation").path(String.valueOf(obj.getIdListGift())).accept(MediaType.APPLICATION_JSON).get(String.class);
+		if(APIResponse != null) {
+			JSONArray array = new JSONArray(APIResponse);
+			
+			try {
+				
+				for(int i=0; i < array.length(); i++) {
+					
+					JSONObject json = array.getJSONObject(i);
+					int idCustomer = json.getInt("idCustomer");
+					String firstName = json.getString("firstName");
+					String lastName = json.getString("lastName");
+					JSONObject jsonDob = json.getJSONObject("dateOfBirth");
+					int year = jsonDob.getInt("year");
+					int month = jsonDob.getInt("monthValue");
+					int day = jsonDob.getInt("dayOfMonth");
+					LocalDate dateOfBirth = LocalDate.of(year, month, day);
+					String username = json.getString("username");
+					String password = json.getString("password");
+					
+					Customer customer = new Customer(idCustomer ,firstName, lastName, dateOfBirth, username, password);
+					
+					customers.add(customer);
+				
+				}
+			}
+			catch(Exception e)	{
+				System.out.println(e.getMessage());
+				return null;
+			}	
+		}
+		return customers;
+		
+	}
 }
