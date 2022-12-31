@@ -154,6 +154,17 @@ public class ListGift implements Serializable {
 	public boolean insert() {
 		return listGiftDAO.create(this);
 	}
+	
+	public boolean update() {
+		if(status == true) {
+			status = false;
+		}
+		else
+		{
+			status = true;
+		}
+		return listGiftDAO.update(this);
+	}
 
 
 
