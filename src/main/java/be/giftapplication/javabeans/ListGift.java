@@ -156,14 +156,37 @@ public class ListGift implements Serializable {
 	}
 	
 	public boolean update() {
-		if(status == true) {
-			status = false;
-		}
-		else
+		if(deadline.equals(LocalDate.of(1000, 1, 1)))
 		{
-			status = true;
+			if(status == true) {
+				status = false;
+			}
+			else
+			{
+				status = true;
+			}
 		}
+		
+		
+		
 		return listGiftDAO.update(this);
+	}
+	
+	public boolean dailyUpdate(ListGift l) {
+		boolean success = false;
+		if(deadline.equals(LocalDate.now()))
+		{
+			if(status == true) {
+				
+				l.setStatus(false);
+			    success = listGiftDAO.update(l);
+			    if(success) {
+			    	status = false;
+			    }
+			    return success;
+			}
+		}
+		return success;
 	}
 
 

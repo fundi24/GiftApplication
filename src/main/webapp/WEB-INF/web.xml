@@ -83,6 +83,11 @@
   	<servlet-class>be.giftapplication.servlets.ConsultInvitations</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>ModifyListGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ModifyListGift</servlet-class>
+  </servlet>
+  
 
 
   <servlet-mapping>
@@ -140,6 +145,11 @@
   <servlet-mapping>
   	<servlet-name>ConsultInvitations</servlet-name>
   	<url-pattern>/consultinvitations</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>ModifyListGift</servlet-name>
+  	<url-pattern>/modifylistgift</url-pattern>
   </servlet-mapping>
   
   

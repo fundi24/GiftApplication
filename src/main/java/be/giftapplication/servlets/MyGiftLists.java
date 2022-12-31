@@ -41,6 +41,10 @@ public class MyGiftLists extends HttpServlet {
 				if(receipt) {
 					session.setAttribute("customer", customer);
 				}
+				for (ListGift l : customer.getMyListGifts()) {
+					ListGift listGiftWithoutOwner = new ListGift(l.getIdListGift(), l.getName(), l.getDeadline(), l.isStatus(), l.getTheme(), null);
+					l.dailyUpdate(listGiftWithoutOwner);
+				}
 				request.setAttribute("giftLists", customer.getMyListGifts());
 				getServletContext().getRequestDispatcher("/WEB-INF/MyGiftLists.jsp").forward(request, response);
 			}
