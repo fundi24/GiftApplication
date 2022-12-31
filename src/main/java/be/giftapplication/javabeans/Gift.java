@@ -173,6 +173,12 @@ public class Gift implements Serializable {
 		
 		return success;
 	}
+	
+	public void getGiftParticipations() {
+		this.participations = Participation.getParticipationsFromGift(this);
+		
+	
+	}
 
 
 	@Override

@@ -26,7 +26,6 @@
 			<th>Priorité</th>
 			<th>Status</th>
 			<th></th>
-			<th></th>
 		</tr>
 	<%if(listgift.getGifts().size() > 0){ %>
 	
@@ -45,11 +44,6 @@
 			<input type="hidden" name="idGift" 
 				value="<%= g.getIdGift() %>" />
 			<td><button type="submit" class = "btn btn-primary btn-sm">Consulter</button></td>
-			</form>
-			<form action="modifygift" method="get"> 
-			<input type="hidden" name="idGift" 
-				value="<%= g.getIdGift() %>" />
-			<td><button type="submit" class = "btn btn-primary btn-sm">Modifier</button></td>
 			</form>
 		</tr>
 		<%} %>

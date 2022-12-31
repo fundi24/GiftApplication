@@ -18,6 +18,7 @@
     <servlet-name>ModifyPriority</servlet-name>
     <servlet-name>ConsultInvitations</servlet-name>
     <servlet-name>MyNotifications</servlet-name>
+    <servlet-name>ConsultParticipations</servlet-name>
   </filter-mapping>
   
   <welcome-file-list>
@@ -85,6 +86,11 @@
   	<servlet-class>be.giftapplication.servlets.ConsultInvitations</servlet-class>
   </servlet>
   
+  <servlet>
+  	<servlet-name>ConsultParticipations</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ConsultParticipations</servlet-class>
+  </servlet>
+  
 
 
   <servlet-mapping>
@@ -142,6 +148,11 @@
   <servlet-mapping>
   	<servlet-name>ConsultInvitations</servlet-name>
   	<url-pattern>/consultinvitations</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>ConsultParticipations</servlet-name>
+  	<url-pattern>/consultparticipations</url-pattern>
   </servlet-mapping>
   
   

@@ -1,11 +1,17 @@
 package be.giftapplication.javabeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import be.giftapplication.dao.DAO;
+
+import be.giftapplication.dao.ParticipationDAO;
 
 
 
 public class Participation implements Serializable {
 	private static final long serialVersionUID = -4098840781809412627L;
+	private static final DAO<Participation> participationDAO = new ParticipationDAO();
 	private int idParticipation;
 	private double amountPaid;
 	private Customer customer;
@@ -58,4 +64,9 @@ public class Participation implements Serializable {
 	}
 	
 	//Call to DAO
+	
+	public static ArrayList<Participation> getParticipationsFromGift(Gift gift){
+		return participationDAO.findAll(gift);
+		
+	}
 }

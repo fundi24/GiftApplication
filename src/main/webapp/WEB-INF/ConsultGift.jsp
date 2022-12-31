@@ -63,8 +63,13 @@
 		<%
 		} else {
 		%>
-		<a href="Consultparticipations" class="btn btn-primary btn-sm">Consulter
-			participations</a>
+		<div class="mt-1">
+			<form action="consultparticipations" method="get">
+				<input type="hidden" name="idGift"
+					value="<%= gift.getIdGift() %>" />
+				<td><button type="submit" class="btn btn-primary btn-sm">Consulter participations</button></td>
+			</form>
+		</div>
 		<%
 		}
 		%>
