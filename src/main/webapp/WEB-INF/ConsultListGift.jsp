@@ -81,9 +81,13 @@
 				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
 				<% if(listgift.getDeadline().equals(LocalDate.of(1000, 1, 1))){ %>
 				<td><button type="submit" class = "btn btn-primary btn-sm">Activer/Désactiver</button></td>
-				<% } else {%> 
-				<td><button type="submit" class = "btn btn-primary btn-sm" disabled>Activer/Désactiver</button></td>
-				<% } %>
+				<% }%> 
+			</form>
+			<form action="modifylistgift" method="get"> 
+				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
+				<% if(!listgift.getDeadline().equals(LocalDate.of(1000, 1, 1))){ %>
+				<td><button type="submit" class = "btn btn-primary btn-sm">Activer/Désactiver</button></td>
+				<% }%> 
 			</form>
 		</div>
 		<div class="col-auto">

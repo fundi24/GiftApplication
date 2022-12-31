@@ -1,6 +1,7 @@
 package be.giftapplication.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -74,6 +75,7 @@ public class ConsultListGift extends HttpServlet {
 		ListGift listGiftWithoutOwner = new ListGift();
 		listGiftWithoutOwner.setIdListGift(idListGift);
 		listGiftWithoutOwner.setStatus(listgift.isStatus());
+		listGiftWithoutOwner.setDeadline(LocalDate.of(1000, 1, 1));
 		boolean result = listGiftWithoutOwner.update();
 		if(result) {
 			response.sendRedirect("mygiftlists");
