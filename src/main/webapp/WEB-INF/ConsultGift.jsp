@@ -21,16 +21,20 @@
 	if (!gift.getLinkToWebsite().equals(null)) {
 		link = gift.getLinkToWebsite();
 	}
-	
 	%>
 	<h2 class="m-2">Mon cadeau</h2>
 	<p></p>
-	<img src="data:image/jpg;base64,<%= request.getAttribute("img") %>" />
 
- 	<%if(!gift.getPicture().equals("null")){ %>
- 		<%-- <img src="/GiftApplication/ImageGift?idGift=<%= gift.getIdGift() %>"> --%>
- 	<%} %>
+
 	<div class="card" style="width: 50rem;">
+		<%
+		if (!gift.getPicture().equals("null")) {
+		%>
+		<img class="card-img-top"
+			src="data:image/jpg;base64,<%=request.getAttribute("picture")%>" />
+		<%
+		}
+		%>
 		<div class="card-body">
 			<h5 class="card-title"><%=gift.getName()%></h5>
 			<p class="card-text">
@@ -61,8 +65,7 @@
 		%>
 		<div class="mt-1">
 			<form action="modifygift" method="get">
-				<input type="hidden" name="idGift"
-					value="<%= gift.getIdGift() %>" />
+				<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" />
 				<td><button type="submit" class="btn btn-primary btn-sm">Modifier</button></td>
 			</form>
 		</div>
@@ -71,21 +74,21 @@
 		%>
 		<div class="mt-1">
 			<form action="consultparticipations" method="get">
-				<input type="hidden" name="idGift"
-					value="<%= gift.getIdGift() %>" />
-				<td><button type="submit" class="btn btn-primary btn-sm">Consulter participations</button></td>
+				<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" />
+				<td><button type="submit" class="btn btn-primary btn-sm">Consulter
+						participations</button></td>
 			</form>
 		</div>
 		<%
 		}
 		%>
 	</div>
-	
+
 	<div class="mt-1">
-		<form action="consultlistgift" method="get"> 
-			<input type="hidden" name="idListGift" 
-				value="<%= request.getAttribute("idListGift")%>" />
-			<td><button type="submit" class = "btn btn-primary btn-sm">Retour</button></td>
+		<form action="consultlistgift" method="get">
+			<input type="hidden" name="idListGift"
+				value="<%=request.getAttribute("idListGift")%>" />
+			<td><button type="submit" class="btn btn-primary btn-sm">Retour</button></td>
 		</form>
 	</div>
 

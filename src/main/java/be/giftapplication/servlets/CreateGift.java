@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -67,9 +68,11 @@ public class CreateGift extends HttpServlet {
 		String nameParam = request.getParameter("name");
 		String descriptionParam = request.getParameter("description");
 		String strPriceParam = request.getParameter("price");
+		
 		InputStream inputStream = request.getPart("picture").getInputStream();
 		byte[] arrayBytes = inputStream.readAllBytes();
-		String picture = new String(arrayBytes, StandardCharsets.UTF_8);
+		String picture = Base64.getEncoder().encodeToString(arrayBytes);
+		
 		String linkToWebsiteParam = request.getParameter("linkToWebsite");
 		
 		HttpSession session = request.getSession(false);

@@ -86,9 +86,15 @@
   	<servlet-class>be.giftapplication.servlets.ConsultInvitations</servlet-class>
   </servlet>
   
+
   <servlet>
   	<servlet-name>ConsultParticipations</servlet-name>
   	<servlet-class>be.giftapplication.servlets.ConsultParticipations</servlet-class>
+  </servlet>
+  	
+   <servlet>
+  	<servlet-name>ModifyListGift</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.ModifyListGift</servlet-class>
   </servlet>
   
 
@@ -150,9 +156,15 @@
   	<url-pattern>/consultinvitations</url-pattern>
   </servlet-mapping>
   
+
   <servlet-mapping>
   	<servlet-name>ConsultParticipations</servlet-name>
   	<url-pattern>/consultparticipations</url-pattern>
+  </servlet-mapping>
+
+   <servlet-mapping>
+  	<servlet-name>ModifyListGift</servlet-name>
+  	<url-pattern>/modifylistgift</url-pattern>
   </servlet-mapping>
   
   
