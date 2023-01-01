@@ -139,6 +139,17 @@ public class Gift implements Serializable {
 	public void setParticipations(ArrayList<Participation> participations) {
 		this.participations = participations;
 	}
+	
+	public double calculTotal() {
+		double total = 0;
+		
+		for(Participation p : participations) {
+			total += p.getAmountPaid();
+		}
+		
+		return total;
+		
+	}
 
 	//Add and remove for lists
 	
@@ -159,6 +170,45 @@ public class Gift implements Serializable {
 	public boolean insert() {
 		return giftDAO.create(this);
 	}
+	
+	public boolean update(Gift giftWithoutList) {
+		//send to dao the owner without his lists
+		boolean success = giftDAO.update(giftWithoutList);
+		if(success) {
+			this.name = giftWithoutList.getName();
+			this.description = giftWithoutList.getDescription();
+			this.price = giftWithoutList.getPrice();
+			this.picture = giftWithoutList.getPicture();
+			this.linkToWebsite = giftWithoutList.getLinkToWebsite();
+		}
+		
+		return success;
+	}
+	
+	public boolean updatePriority() {
+		
+		Gift giftWithoutListGift = new Gift(idGift, name, description, price, priority, picture, booked, multiplePayment, linkToWebsite, null);
+		
+		boolean success = giftDAO.update(giftWithoutListGift);
+		
+		return success;
+	}
+	
+	public void getGiftParticipations() {
+		this.participations = Participation.getParticipationsFromGift(this);
+		
+	
+	}
+	
+
+
+	@Override
+	public String toString() {
+		return "Gift [idGift=" + idGift + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", priority=" + priority + ", picture=" + picture + ", booked=" + booked + ", multiplePayment="
+				+ multiplePayment + ", linkToWebsite=" + linkToWebsite +  "]";
+	}
+	
 	
 	
 }

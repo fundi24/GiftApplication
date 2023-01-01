@@ -67,10 +67,21 @@ public class ModifyPriority extends HttpServlet {
 		
 		errors = checkSelectedPriority(selectedPriority, listgift.getGifts());
 		if(errors.size() == 0) {
-			boolean updateSuccess;
-			for(Gift gift : listgift.getGifts()) {
-				
+			boolean receipt = listgift.updateGiftsPriority(selectedPriority);
+			
+			if(receipt) {
+				request.setAttribute("success", "Modification réussite");
+				request.setAttribute("listgift", listgift);
+				getServletContext().getRequestDispatcher("/WEB-INF/ModifyPriority.jsp").forward(request, response);
 			}
+			else {
+				request.setAttribute("error", "Une erreur s'est produite lors de la modification.");
+				request.setAttribute("listgift", listgift);
+				getServletContext().getRequestDispatcher("/WEB-INF/ModifyPriority.jsp").forward(request, response);
+			}
+			
+			
+			
 		}
 		else {
 			request.setAttribute("errors", errors);

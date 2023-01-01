@@ -1,17 +1,7 @@
 package be.giftapplication.servlets;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Base64;
-
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,16 +12,16 @@ import be.giftapplication.javabeans.Gift;
 import be.giftapplication.javabeans.ListGift;
 
 /**
- * Servlet implementation class ConsultGift
+ * Servlet implementation class ConsultParticipations
  */
 
-public class ConsultGift extends HttpServlet {
+public class ConsultParticipations extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ConsultGift() {
+    public ConsultParticipations() {
         super();
        
     }
@@ -46,13 +36,13 @@ public class ConsultGift extends HttpServlet {
 		int idGift = Integer.parseInt(request.getParameter("idGift"));
 		ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 		Gift gift = listGift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
+		gift.getGiftParticipations();
 		
 		request.setAttribute("gift", gift);
 		
-	    request.setAttribute("picture", gift.getPicture());
+		getServletContext().getRequestDispatcher("/WEB-INF/ConsultParticipations.jsp").forward(request, response);
 		
-		request.setAttribute("idListGift", idListGift);
-		getServletContext().getRequestDispatcher("/WEB-INF/ConsultGift.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -62,4 +52,5 @@ public class ConsultGift extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
 }

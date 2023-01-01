@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -62,14 +63,21 @@ public class CreateGift extends HttpServlet {
 		ArrayList<String> errors = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
 			errors.add("");
+			
 		}
 		String nameParam = request.getParameter("name");
 		String descriptionParam = request.getParameter("description");
 		String strPriceParam = request.getParameter("price");
+		
 		InputStream inputStream = request.getPart("picture").getInputStream();
 		byte[] arrayBytes = inputStream.readAllBytes();
-		String picture = new String(arrayBytes, StandardCharsets.UTF_8);
+		String picture = Base64.getEncoder().encodeToString(arrayBytes);
+		
 		String linkToWebsiteParam = request.getParameter("linkToWebsite");
+		
+		HttpSession session = request.getSession(false);
+		Customer customer = (Customer) session.getAttribute("customer");
+		int idListGift = (int) session.getAttribute("idListGift");
 		
 		
 		if (request.getParameter("submit") != null) {
@@ -77,10 +85,7 @@ public class CreateGift extends HttpServlet {
 			if (!checkErrors(errors)) {
 				double priceParam = Double.parseDouble(strPriceParam);
 				//Get Customer from session and get idListGift from request
-				HttpSession session = request.getSession(false);
-				Customer customer = (Customer) session.getAttribute("customer");
-
-				int idListGift = (int) session.getAttribute("idListGift");
+				
 
 				//Find listgift from the giftlists of the customer with the id
 				ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
@@ -94,17 +99,20 @@ public class CreateGift extends HttpServlet {
 				
 				if(gift.insert()) {
 					request.setAttribute("createGiftSuccess", "Création du cadeau réussite.");
+					request.setAttribute("idListGift", idListGift);
 					request.setAttribute("errors", errors);
 					getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
 				}
 				else {
 					request.setAttribute("createGiftError", "Erreur dans la création du cadeau.");
+					request.setAttribute("idListGift", idListGift);
                 	request.setAttribute("errors", errors);
                 	getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
 				}
 			}
 			else {
             	request.setAttribute("errors", errors);
+            	request.setAttribute("idListGift", idListGift);
             	getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
 			}
 		}
@@ -129,6 +137,7 @@ public class CreateGift extends HttpServlet {
 		}
 			
 		//Link ??
+		
 		
 
 		return errors;

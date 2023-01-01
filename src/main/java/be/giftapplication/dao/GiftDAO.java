@@ -14,6 +14,7 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import be.giftapplication.javabeans.Gift;
 import be.giftapplication.javabeans.ListGift;
+import be.giftapplication.javabeans.Notification;
 
 public class GiftDAO extends DAO<Gift> {
 
@@ -43,7 +44,25 @@ public class GiftDAO extends DAO<Gift> {
 
 	@Override
 	public boolean update(Gift obj) {
-		return false;
+		boolean success = false;
+		Gift gift = null;
+		if(obj instanceof Gift) {
+			gift = (Gift) obj;
+		}
+		
+		ClientResponse res;
+		try {
+			res = this.resource.path("gift").path(String.valueOf(gift.getIdGift())).header("Content-Type","application/json;charset=UTF-8").put(ClientResponse.class, mapper.writeValueAsString(gift));
+			int httpResponseCode = res.getStatus();
+			if (httpResponseCode == 204) {
+				success = true;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		
+		
+		return success;
 	}
 
 	@Override

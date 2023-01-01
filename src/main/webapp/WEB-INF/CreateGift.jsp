@@ -28,7 +28,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="price" class="form-label">Prix</label> <input
-				type="number" class="form-control" name="price" id="price">
+				type="number" class="form-control" name="price" id="price" step="0.01">
 			<div class="form-text"><%=errors.get(2)%></div>
 		</div>
 		<div class="mb-3">
