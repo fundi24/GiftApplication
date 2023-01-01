@@ -139,6 +139,17 @@ public class Gift implements Serializable {
 	public void setParticipations(ArrayList<Participation> participations) {
 		this.participations = participations;
 	}
+	
+	public double calculTotal() {
+		double total = 0;
+		
+		for(Participation p : participations) {
+			total += p.getAmountPaid();
+		}
+		
+		return total;
+		
+	}
 
 	//Add and remove for lists
 	
@@ -179,6 +190,7 @@ public class Gift implements Serializable {
 		
 	
 	}
+	
 
 
 	@Override

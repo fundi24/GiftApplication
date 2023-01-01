@@ -21,9 +21,15 @@
 	if (!gift.getLinkToWebsite().equals(null)) {
 		link = gift.getLinkToWebsite();
 	}
+	
 	%>
 	<h2 class="m-2">Mon cadeau</h2>
+	<p></p>
+	<img src="data:image/jpg;base64,<%= request.getAttribute("img") %>" />
 
+ 	<%if(!gift.getPicture().equals("null")){ %>
+ 		<%-- <img src="/GiftApplication/ImageGift?idGift=<%= gift.getIdGift() %>"> --%>
+ 	<%} %>
 	<div class="card" style="width: 50rem;">
 		<div class="card-body">
 			<h5 class="card-title"><%=gift.getName()%></h5>

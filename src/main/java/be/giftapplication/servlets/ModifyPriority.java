@@ -67,10 +67,9 @@ public class ModifyPriority extends HttpServlet {
 		
 		errors = checkSelectedPriority(selectedPriority, listgift.getGifts());
 		if(errors.size() == 0) {
-			boolean updateSuccess;
-			for(Gift gift : listgift.getGifts()) {
-				
-			}
+			//boolean receipt = listgift.updateGiftsPriority();
+			
+			
 		}
 		else {
 			request.setAttribute("errors", errors);

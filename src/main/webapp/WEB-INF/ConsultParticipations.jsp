@@ -32,6 +32,9 @@
 	<%} %>
 	</table>
 	
+	
+	<p>Total : <%= gift.calculTotal() %></p>
+	
 	<div class="mt-1">
 		<form action="consultgift" method="get"> 
 			<input type="hidden" name="idGift" 

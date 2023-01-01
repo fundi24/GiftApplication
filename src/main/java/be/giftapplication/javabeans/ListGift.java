@@ -167,7 +167,11 @@ public class ListGift implements Serializable {
 	}
 
 
-
+	/*public boolean updateGiftsPriority() {
+		ListGift listgiftWithoutList = new ListGift();
+		listgift
+		boolean success = listGiftDAO.update(listgift);
+	}*/
 
 	@Override
 	public String toString() {

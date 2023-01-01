@@ -53,7 +53,7 @@ public class ConsultGift extends HttpServlet {
 	    //ByteArrayOutputStream output = new ByteArrayOutputStream();
 	    //BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(gift.getPicture().getBytes()));
 	    //String base64Image = Base64.getEncoder().encodeToString(gift.getPicture().getBytes());
-	  //request.setAttribute("imageAsBase64", base64Image);
+	    request.setAttribute("img", gift.getPicture());
 		
 		request.setAttribute("idListGift", idListGift);
 		getServletContext().getRequestDispatcher("/WEB-INF/ConsultGift.jsp").forward(request, response);
