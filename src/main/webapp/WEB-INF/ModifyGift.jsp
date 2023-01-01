@@ -16,15 +16,15 @@
 		
 		%>
 		<div class="mb-3">
-			<label for="name" class="form-label">Nom</label>
+			<label for="name" class="form-label">Nom(Optionelle)</label>
 			 <input type="text"class="form-control" name="name" id="name">
 		</div>
 		<div class="mb-3">
-			<label for="description" class="form-label">Description</label> 
+			<label for="description" class="form-label">Description(Optionnelle)</label> 
 			<input type="text" class="form-control" name="description" id="description">
 		</div>
 		<div class="mb-3">
-			<label for="price"  class="form-label">Prix</label> <input
+			<label for="price"  class="form-label">Prix(Optionnelle)</label> <input
 				type="number" class="form-control" name="price" id="price" step="0.01">
 				<% if(errorPrice != null){ %>
 			<div class="form-text"><%=errorPrice%></div>
@@ -72,7 +72,6 @@
 		</form>
 	</div>
 	
-
 
 </body>
 </html>

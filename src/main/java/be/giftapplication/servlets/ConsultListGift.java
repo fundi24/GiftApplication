@@ -48,6 +48,8 @@ public class ConsultListGift extends HttpServlet {
 		}
 		request.setAttribute("listgift", listgift);
 		
+		request.setAttribute("link", request.getRequestURL() + "?" + request.getQueryString());
+		
 		boolean canModifyPriority = true;
 		for(int i=0; i < listgift.getGifts().size() && canModifyPriority == true; i++) {
 			Gift g = listgift.getGifts().get(i);

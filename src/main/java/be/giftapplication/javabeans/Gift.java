@@ -185,6 +185,15 @@ public class Gift implements Serializable {
 		return success;
 	}
 	
+	public boolean updatePriority() {
+		
+		Gift giftWithoutListGift = new Gift(idGift, name, description, price, priority, picture, booked, multiplePayment, linkToWebsite, null);
+		
+		boolean success = giftDAO.update(giftWithoutListGift);
+		
+		return success;
+	}
+	
 	public void getGiftParticipations() {
 		this.participations = Participation.getParticipationsFromGift(this);
 		

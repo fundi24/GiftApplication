@@ -18,7 +18,7 @@
 	booked = gift.isBooked() ? "Réservé" : "Non réservé";
 	multiplePayment = gift.isMultiplePayment() ? "Oui" : "Non";
 
-	if (!gift.getLinkToWebsite().equals(null)) {
+	if (!gift.getLinkToWebsite().equals("null")) {
 		link = gift.getLinkToWebsite();
 	}
 	%>

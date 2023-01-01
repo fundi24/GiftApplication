@@ -42,5 +42,22 @@
 	<% if(request.getAttribute("errors") != null) {%>
 		<div class="alert alert-danger"><%= errors.get(0) %></div>
 	<%} %>
+	
+	<% if(request.getAttribute("error") != null) {%>
+		<div class="alert alert-danger"><%= request.getAttribute("error") %></div>
+	<%} %>
+	
+	<% if(request.getAttribute("success") != null) {%>
+		<div class="alert alert-success"><%= request.getAttribute("success") %></div>
+	<%} %>
+	
+	<div class="mt-1">
+		<form action="consultlistgift" method="get"> 
+			<input type="hidden" name="idListGift" 
+				value="<%= listgift.getIdListGift()%>" />
+			<td><button type="submit" class = "btn btn-primary btn-sm">Retour</button></td>
+		</form>
+	</div>
+	
 </body>
 </html>

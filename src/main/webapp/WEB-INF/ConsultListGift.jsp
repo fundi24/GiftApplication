@@ -94,11 +94,17 @@
 	
 	<div class="input-group m-2 ">
 	    <span class="input-group-text" id="basic-addon3">Lien</span>
-	    <input type="text" class="form-control"  value="http://GiftApplication" aria-describedby="basic-addon3" readonly>
+	    <input type="text" class="form-control"  value="<%= request.getAttribute("link") %>" aria-describedby="basic-addon3" readonly>
   	</div>
 	
 	
-	<div class="m-2" ><a href="mygiftlists" class="btn btn-primary btn-sm">Retour</a></div>
+	<div class="mt-1">
+		<form action="mygiftlists" method="get"> 
+			<input type="hidden" name="idListGift" 
+				value="<%= listgift.getIdListGift()%>" />
+			<td><button type="submit" class = "btn btn-primary btn-sm">Retour</button></td>
+		</form>
+	</div>
 	
 </body>
 </html>

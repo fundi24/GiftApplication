@@ -34,8 +34,8 @@ public class MyNotifications extends HttpServlet {
 		boolean receipt = customer.getCustomerNotifications();
 		if(receipt) {
 			session.setAttribute("customer", customer);
-			request.setAttribute("notifications", customer.getNotifications());
 		}
+		request.setAttribute("notifications", customer.getNotifications());
 		getServletContext().getRequestDispatcher("/WEB-INF/MyNotifications.jsp").forward(request, response);
 	}
 

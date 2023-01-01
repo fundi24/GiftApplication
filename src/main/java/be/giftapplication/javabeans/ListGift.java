@@ -190,11 +190,16 @@ public class ListGift implements Serializable {
 	}
 
 
-	/*public boolean updateGiftsPriority() {
-		ListGift listgiftWithoutList = new ListGift();
-		listgift
-		boolean success = listGiftDAO.update(listgift);
-	}*/
+	public boolean updateGiftsPriority(int[] selectedPriority) {
+		boolean success = true;
+		for(int i=0; i < gifts.size() && success == true; i++) {
+			gifts.get(i).setPriority(selectedPriority[i]);
+			success = gifts.get(i).updatePriority();
+		}
+		
+		return success;
+		
+	}
 
 	@Override
 	public String toString() {

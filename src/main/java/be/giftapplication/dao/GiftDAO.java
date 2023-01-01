@@ -54,8 +54,6 @@ public class GiftDAO extends DAO<Gift> {
 		try {
 			res = this.resource.path("gift").path(String.valueOf(gift.getIdGift())).header("Content-Type","application/json;charset=UTF-8").put(ClientResponse.class, mapper.writeValueAsString(gift));
 			int httpResponseCode = res.getStatus();
-			System.out.println(gift);
-			System.out.println(httpResponseCode);
 			if (httpResponseCode == 204) {
 				success = true;
 			}

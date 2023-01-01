@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -60,43 +61,58 @@ public class ModifyGift extends HttpServlet {
 		String strPriceParam = request.getParameter("price");
 		InputStream inputStream = request.getPart("picture").getInputStream();
 		byte[] arrayBytes = inputStream.readAllBytes();
-		String pictureParam = new String(arrayBytes, StandardCharsets.UTF_8);
+		String pictureParam = Base64.getEncoder().encodeToString(arrayBytes);
 		String linkToWebsiteParam = request.getParameter("linkToWebsite");
 
 		HttpSession session = request.getSession(false);
 		Customer customer = (Customer) session.getAttribute("customer");
 		int idListGift = (int) session.getAttribute("idListGift");
 		int idGift = Integer.parseInt(request.getParameter("idGift"));
+		
+		
 
 		if (request.getParameter("submit") != null) {
-
-			double priceParam = 0;
-			if (strPriceParam != null && !strPriceParam.equals("")) {
-				priceParam = Double.parseDouble(strPriceParam);
-			}
-
-			boolean receipt = false;
-			ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift)
-					.findFirst().orElse(null);
-			Gift gift = listgift.getGifts().stream().filter(g -> g.getIdGift() == idGift).findFirst().orElse(null);
-
-			Gift giftWithoutList = createGiftWithoutList(nameParam, descriptionParam, priceParam, pictureParam,
-					linkToWebsiteParam, gift);
-
-			receipt = gift.update(giftWithoutList);
-
-			if (receipt) {
-				request.setAttribute("idGift", idGift);
-				request.setAttribute("modifyGiftSuccess", "Modification réussie.");
-				getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
-			} else {
+			
+			if(nameParam.equals("")  && descriptionParam.equals("") && strPriceParam.equals("") && pictureParam.equals("") && linkToWebsiteParam.equals("")) {
 				request.setAttribute("idGift", idGift);
 				request.setAttribute("modifyGiftError",
-						"Il semble qu'un prolème se soit déroulé lors de la modification.");
+						"Vous devez entrer au moins un des champs.");
 				getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
 			}
-		}
+			else {
+				
+				double priceParam = 0;
+				if (strPriceParam != null && !strPriceParam.equals("")) {
+					priceParam = Double.parseDouble(strPriceParam);
+				}
+				
 
+				boolean receipt = false;
+				ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift)
+						.findFirst().orElse(null);
+				Gift gift = listgift.getGifts().stream().filter(g -> g.getIdGift() == idGift).findFirst().orElse(null);
+
+				Gift giftWithoutList = createGiftWithoutList(nameParam, descriptionParam, priceParam, pictureParam,
+						linkToWebsiteParam, gift);
+
+				
+				receipt = gift.update(giftWithoutList);
+
+				if (receipt) {
+					request.setAttribute("idGift", idGift);
+					request.setAttribute("modifyGiftSuccess", "Modification réussie.");
+					getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
+				} else {
+					request.setAttribute("idGift", idGift);
+					request.setAttribute("modifyGiftError",
+							"Il semble qu'un prolème se soit déroulé lors de la modification.");
+					getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
+				}
+				
+			}
+
+			
+		}
 		else {
 			request.setAttribute("idGift", idGift);
 			getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
@@ -112,8 +128,9 @@ public class ModifyGift extends HttpServlet {
 		String picture;
 		String linkToWebsite;
 
+		//Ne fonctionne pas
 		// String linkToWebsite = linkToWebsiteParam == null ? gift.getPicture() :
-		// linkToWebsiteParam;
+		
 
 		if (nameParam == null || nameParam.equals("")) {
 			name = gift.getName();
