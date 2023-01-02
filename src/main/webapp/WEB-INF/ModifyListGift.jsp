@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" %>
 <jsp:useBean id="listgift" class="be.giftapplication.javabeans.ListGift"
 	scope="request"></jsp:useBean>
 <%@page import="be.giftapplication.javabeans.ListGift"%>
@@ -35,5 +35,13 @@
     <% 
         }
     %>
+    
+    	<div class="mt-1">
+		<form action="consultlistgift" method="get"> 
+			<input type="hidden" name="idListGift" 
+				value="<%= listgift.getIdListGift()%>" />
+			<td><button type="submit" class = "btn btn-primary btn-sm">Retour</button></td>
+		</form>
+	</div>
 </body>
 </html>

@@ -35,19 +35,24 @@ public class ModifyListGift extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<String> errors = new ArrayList<>();
-        for(int i=0; i<1; i++)
-        {
-        	errors.add("");
-        }
-        request.setAttribute("errors", errors);
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		idListGift = (int) session.getAttribute("idListGift");
-		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
-		request.setAttribute("listgift", listgift);
-		
-		getServletContext().getRequestDispatcher("/WEB-INF/ModifyListGift.jsp").forward(request, response);
+		try {
+			ArrayList<String> errors = new ArrayList<>();
+	        for(int i=0; i<1; i++)
+	        {
+	        	errors.add("");
+	        }
+	        request.setAttribute("errors", errors);
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			idListGift = (int) session.getAttribute("idListGift");
+			ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+			request.setAttribute("listgift", listgift);
+			
+			getServletContext().getRequestDispatcher("/WEB-INF/ModifyListGift.jsp").forward(request, response);
+		}catch(Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
+		}
 
 	}
 

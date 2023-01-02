@@ -34,35 +34,41 @@ public class ConsultListGift extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idListGift = Integer.parseInt(request.getParameter("idListGift"));
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		session.setAttribute("idListGift", idListGift);
+		try {
+			int idListGift = Integer.parseInt(request.getParameter("idListGift"));
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			session.setAttribute("idListGift", idListGift);
 
-		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+			ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 
-		//! A RELIRE !
-		boolean receipt = listgift.getListGiftGifts();
-		if(receipt) {
-			session.setAttribute("customer", customer);
-		}
-		request.setAttribute("listgift", listgift);
-		
-		request.setAttribute("link", request.getRequestURL() + "?" + request.getQueryString());
-		
-		boolean canModifyPriority = true;
-		for(int i=0; i < listgift.getGifts().size() && canModifyPriority == true; i++) {
-			Gift g = listgift.getGifts().get(i);
-			if(g.isBooked()) {
-				canModifyPriority = false;
-				request.setAttribute("canModifyPriorityError", "Un ou plusieurs cadeaux de votre liste est déjà réservé.");
-				
+			//! A RELIRE !
+			boolean receipt = listgift.getListGiftGifts();
+			if(receipt) {
+				session.setAttribute("customer", customer);
 			}
+			request.setAttribute("listgift", listgift);
+			
+			request.setAttribute("link", request.getRequestURL() + "?" + request.getQueryString());
+			
+			boolean canModifyPriority = true;
+			for(int i=0; i < listgift.getGifts().size() && canModifyPriority == true; i++) {
+				Gift g = listgift.getGifts().get(i);
+				if(g.isBooked()) {
+					canModifyPriority = false;
+					request.setAttribute("canModifyPriorityError", "Un ou plusieurs cadeaux de votre liste est déjà réservé.");
+					
+				}
+			}
+			
+		
+			
+			getServletContext().getRequestDispatcher("/WEB-INF/ConsultListGift.jsp").forward(request, response);
+		} catch(Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
 		}
 		
-	
-		
-		getServletContext().getRequestDispatcher("/WEB-INF/ConsultListGift.jsp").forward(request, response);
 		
 	}
 

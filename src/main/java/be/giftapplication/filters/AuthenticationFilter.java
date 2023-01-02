@@ -23,7 +23,7 @@ public class AuthenticationFilter implements Filter {
 		
 		if(session != null) {
 			Customer customer = (Customer) session.getAttribute("customer");
-			if(customer != null) {
+			if(customer.getIdCustomer() != 0) {
 				chain.doFilter(request, response);
 			}
 			else {

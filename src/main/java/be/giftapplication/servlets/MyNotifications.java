@@ -29,14 +29,18 @@ public class MyNotifications extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		boolean receipt = customer.getCustomerNotifications();
-		if(receipt) {
-			session.setAttribute("customer", customer);
+		try {
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			boolean receipt = customer.getCustomerNotifications();
+			if(receipt) {
+				session.setAttribute("customer", customer);
+			}
+			request.setAttribute("notifications", customer.getNotifications());
+			getServletContext().getRequestDispatcher("/WEB-INF/MyNotifications.jsp").forward(request, response);
+		}catch (Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
 		}
-		request.setAttribute("notifications", customer.getNotifications());
-		getServletContext().getRequestDispatcher("/WEB-INF/MyNotifications.jsp").forward(request, response);
 	}
 
 	/**

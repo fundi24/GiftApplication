@@ -33,22 +33,26 @@ public class MyGiftLists extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession(false);
-		if(session != null) {
-			Customer customer = (Customer) session.getAttribute("customer");
-			if(customer != null) {
-				boolean receipt = customer.getCustomerListGifts();
-				if(receipt) {
-					session.setAttribute("customer", customer);
+		try {
+			HttpSession session = request.getSession(false);
+			if(session != null) {
+				Customer customer = (Customer) session.getAttribute("customer");
+				if(customer != null) {
+					boolean receipt = customer.getCustomerListGifts();
+					if(receipt) {
+						session.setAttribute("customer", customer);
+					}
+					for (ListGift l : customer.getMyListGifts()) {
+						ListGift listGiftWithoutOwner = new ListGift(l.getIdListGift(), l.getName(), l.getDeadline(), l.isStatus(), l.getTheme(), null);
+						l.dailyUpdate(listGiftWithoutOwner);
+					}
+					request.setAttribute("giftLists", customer.getMyListGifts());
+					getServletContext().getRequestDispatcher("/WEB-INF/MyGiftLists.jsp").forward(request, response);
 				}
-				for (ListGift l : customer.getMyListGifts()) {
-					ListGift listGiftWithoutOwner = new ListGift(l.getIdListGift(), l.getName(), l.getDeadline(), l.isStatus(), l.getTheme(), null);
-					l.dailyUpdate(listGiftWithoutOwner);
-				}
-				request.setAttribute("giftLists", customer.getMyListGifts());
-				getServletContext().getRequestDispatcher("/WEB-INF/MyGiftLists.jsp").forward(request, response);
+				
 			}
-			
+		}catch (Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
 		}
 		
 	}

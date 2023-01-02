@@ -38,14 +38,20 @@ public class ModifyPriority extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		int idListGift = (int) session.getAttribute("idListGift");
-		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
-		request.setAttribute("listgift", listgift);
-		
-		
-		getServletContext().getRequestDispatcher("/WEB-INF/ModifyPriority.jsp").forward(request, response);
+		try {
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			int idListGift = (int) session.getAttribute("idListGift");
+			ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+			request.setAttribute("listgift", listgift);
+			
+			
+			getServletContext().getRequestDispatcher("/WEB-INF/ModifyPriority.jsp").forward(request, response);
+		}catch(Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
+		}
+
 	}
 
 	/**

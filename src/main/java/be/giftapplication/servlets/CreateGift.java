@@ -44,16 +44,21 @@ public class CreateGift extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int idListGift = Integer.parseInt(request.getParameter("idListGift"));
-		
-		ArrayList<String> errors = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
-			errors.add("");
+		try {
+			int idListGift = Integer.parseInt(request.getParameter("idListGift"));
+			
+			ArrayList<String> errors = new ArrayList<>();
+			for (int i = 0; i < 4; i++) {
+				errors.add("");
+			}
+			request.setAttribute("errors", errors);
+			request.setAttribute("idListGift", idListGift);
+			getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
+		}catch (Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
 		}
-		request.setAttribute("errors", errors);
-		request.setAttribute("idListGift", idListGift);
-		getServletContext().getRequestDispatcher("/WEB-INF/CreateGift.jsp").forward(request, response);
-		
+
 	}
 
 	/**
@@ -75,6 +80,7 @@ public class CreateGift extends HttpServlet {
 		
 		String linkToWebsiteParam = request.getParameter("linkToWebsite");
 		
+		//Get Customer from session and get idListGift from request
 		HttpSession session = request.getSession(false);
 		Customer customer = (Customer) session.getAttribute("customer");
 		int idListGift = (int) session.getAttribute("idListGift");
@@ -84,8 +90,6 @@ public class CreateGift extends HttpServlet {
 			errors = checkingParameters(nameParam, descriptionParam, strPriceParam,linkToWebsiteParam ,errors);
 			if (!checkErrors(errors)) {
 				double priceParam = Double.parseDouble(strPriceParam);
-				//Get Customer from session and get idListGift from request
-				
 
 				//Find listgift from the giftlists of the customer with the id
 				ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
@@ -122,6 +126,7 @@ public class CreateGift extends HttpServlet {
 	public ArrayList<String> checkingParameters(String nameParam, String descriptionParam, String strPriceParam, 
 			String linkToWebsiteParam, ArrayList<String> errors) {
 
+		
 		if (nameParam == null || nameParam.equals("")) {
 			errors.add(0, "Le champ [nom] est vide.");
 
@@ -134,6 +139,12 @@ public class CreateGift extends HttpServlet {
 			
 		if (strPriceParam == null || strPriceParam.equals("")) {
 			errors.add(2, "Le champ [prix] est vide.");
+		}
+		else{
+			double priceParam = Double.parseDouble(strPriceParam);
+			if (priceParam <= 0) {
+				errors.add(2, "Le champ [prix] doit être supérieur à 0€. ");
+			}
 		}
 			
 		//Link ??

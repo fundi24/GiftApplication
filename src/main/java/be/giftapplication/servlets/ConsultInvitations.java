@@ -30,23 +30,29 @@ public class ConsultInvitations extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idListGift = Integer.parseInt(request.getParameter("idListGift"));
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		boolean receipt = false;
-		for(int i=0; i < customer.getMyListGifts().size(); i++) {
-			if(customer.getMyListGifts().get(i).getIdListGift() == idListGift) {
-				receipt = customer.getMyListGifts().get(i).getListGiftInvitations();
+		try {
+			int idListGift = Integer.parseInt(request.getParameter("idListGift"));
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			boolean receipt = false;
+			for(int i=0; i < customer.getMyListGifts().size(); i++) {
+				if(customer.getMyListGifts().get(i).getIdListGift() == idListGift) {
+					receipt = customer.getMyListGifts().get(i).getListGiftInvitations();
+				}
 			}
+			if(receipt) {
+				//set customer with updated listgift to the session
+				session.setAttribute("customer", customer);
+			}
+			ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+			
+			request.setAttribute("listgift", listgift);
+			getServletContext().getRequestDispatcher("/WEB-INF/ConsultInvitations.jsp").forward(request, response);
+			
+		}catch(Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
 		}
-		if(receipt) {
-			//set customer with updated listgift to the session
-			session.setAttribute("customer", customer);
-		}
-		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
-		
-		request.setAttribute("listgift", listgift);
-		getServletContext().getRequestDispatcher("/WEB-INF/ConsultInvitations.jsp").forward(request, response);
 		
 	}
 
