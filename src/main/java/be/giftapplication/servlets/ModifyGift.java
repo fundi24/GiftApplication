@@ -40,13 +40,18 @@ public class ModifyGift extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		int idListGift = (int) session.getAttribute("idListGift");
-		int idGift = Integer.parseInt((String) request.getParameter("idGift"));
+		try {
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			int idListGift = (int) session.getAttribute("idListGift");
+			int idGift = Integer.parseInt((String) request.getParameter("idGift"));
 
-		request.setAttribute("idGift", idGift);
-		getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
+			request.setAttribute("idGift", idGift);
+			getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
+		}catch(Exception e) {
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
+		}
 	}
 
 	/**
@@ -105,7 +110,7 @@ public class ModifyGift extends HttpServlet {
 				} else {
 					request.setAttribute("idGift", idGift);
 					request.setAttribute("modifyGiftError",
-							"Il semble qu'un prolème se soit déroulé lors de la modification.");
+							"Il semble qu'un problème se soit déroulé lors de la modification.");
 					getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
 				}
 				

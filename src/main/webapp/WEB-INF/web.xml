@@ -7,6 +7,7 @@
     <filter-class>be.giftapplication.filters.AuthenticationFilter</filter-class>
   </filter>
   
+  
   <filter-mapping>
     <filter-name>AuthenticationFilter</filter-name>
     <servlet-name>MyGiftLists</servlet-name>
@@ -19,7 +20,9 @@
     <servlet-name>ConsultInvitations</servlet-name>
     <servlet-name>MyNotifications</servlet-name>
     <servlet-name>ConsultParticipations</servlet-name>
+    <servlet-name>MyGiftLists</servlet-name>
   </filter-mapping>
+  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -29,6 +32,7 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
   
   <servlet>
   	<servlet-name>Home</servlet-name>
@@ -75,7 +79,6 @@
   	<servlet-class>be.giftapplication.servlets.ModifyGift</servlet-class>
   </servlet>
   
-  
   <servlet>
   	<servlet-name>ModifyPriority</servlet-name>
   	<servlet-class>be.giftapplication.servlets.ModifyPriority</servlet-class>
@@ -86,7 +89,6 @@
   	<servlet-class>be.giftapplication.servlets.ConsultInvitations</servlet-class>
   </servlet>
   
-
   <servlet>
   	<servlet-name>ConsultParticipations</servlet-name>
   	<servlet-class>be.giftapplication.servlets.ConsultParticipations</servlet-class>
@@ -150,12 +152,10 @@
   	<url-pattern>/modifypriority</url-pattern>
   </servlet-mapping>
   
-  
   <servlet-mapping>
   	<servlet-name>ConsultInvitations</servlet-name>
   	<url-pattern>/consultinvitations</url-pattern>
   </servlet-mapping>
-  
 
   <servlet-mapping>
   	<servlet-name>ConsultParticipations</servlet-name>
@@ -165,9 +165,12 @@
    <servlet-mapping>
   	<servlet-name>ModifyListGift</servlet-name>
   	<url-pattern>/modifylistgift</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>	
   
-  
-  
+  	
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/ErrorPage.jsp</location>
+	</error-page>
   
 </web-app>

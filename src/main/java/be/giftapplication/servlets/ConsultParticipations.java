@@ -30,19 +30,23 @@ public class ConsultParticipations extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		Customer customer = (Customer) session.getAttribute("customer");
-		int idListGift = (int) session.getAttribute("idListGift");
-		int idGift = Integer.parseInt(request.getParameter("idGift"));
-		ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
-		Gift gift = listGift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
-		gift.getGiftParticipations();
-		
-		request.setAttribute("gift", gift);
-		
-		getServletContext().getRequestDispatcher("/WEB-INF/ConsultParticipations.jsp").forward(request, response);
-		
-		
+		try {
+			HttpSession session = request.getSession(false);
+			Customer customer = (Customer) session.getAttribute("customer");
+			int idListGift = (int) session.getAttribute("idListGift");
+			int idGift = Integer.parseInt(request.getParameter("idGift"));
+			ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+			Gift gift = listGift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
+			gift.getGiftParticipations();
+			
+			request.setAttribute("gift", gift);
+			
+			getServletContext().getRequestDispatcher("/WEB-INF/ConsultParticipations.jsp").forward(request, response);
+			
+		}catch (Exception e){
+			getServletContext().getRequestDispatcher("/WEB-INF/ErrorPage.jsp").forward(request, response);
+
+		}
 	}
 
 	/**
