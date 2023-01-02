@@ -25,10 +25,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="price"  class="form-label">Prix(Optionnelle)</label> <input
-				type="number" class="form-control" name="price" id="price" step="0.01">
-				<% if(errorPrice != null){ %>
-			<div class="form-text"><%=errorPrice%></div>
-			<%} %>
+				type="number" class="form-control" name="price" id="price" min = "0" step="0.01">
 		</div>
 		<div class="mb-3">
   			<label for="picture" class="form-label">Image(Optionnelle)</label>
@@ -37,6 +34,9 @@
 		<div class="mb-3">
 			<label for="linkToWebsite" class="form-label">Lien vers le site(Optionnelle)</label> 
 			<input type="text" class="form-control" name="linkToWebsite" id="linkToWebsite">
+				<% if(request.getAttribute("ErrorLink") != null){ %>
+			<div class="form-text"><%=request.getAttribute("ErrorLink")%></div>
+			<%} %>
 		</div>
 		<div>
 			<input type="hidden" name="idGift" value="<%= request.getAttribute("idGift")%>" />

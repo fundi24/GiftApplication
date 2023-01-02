@@ -48,7 +48,7 @@ public class CreateGift extends HttpServlet {
 			int idListGift = Integer.parseInt(request.getParameter("idListGift"));
 			
 			ArrayList<String> errors = new ArrayList<>();
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 5; i++) {
 				errors.add("");
 			}
 			request.setAttribute("errors", errors);
@@ -66,7 +66,7 @@ public class CreateGift extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> errors = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			errors.add("");
 			
 		}
@@ -146,10 +146,13 @@ public class CreateGift extends HttpServlet {
 				errors.add(2, "Le champ [prix] doit être supérieur à 0€. ");
 			}
 		}
-			
-		//Link ??
 		
-		
+		if (linkToWebsiteParam != null && !linkToWebsiteParam.equals("")) {
+			boolean result = linkToWebsiteParam.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+			if(result == false) {
+				errors.add(4, "Le champ entré n'est pas un url valide.");
+			}
+		}
 
 		return errors;
 	}

@@ -39,6 +39,8 @@
 		<div class="mb-3">
 			<label for="linkToWebsite" class="form-label">Lien vers le site(Optionnelle)</label> 
 			<input type="text" class="form-control" name="linkToWebsite" id="linkToWebsite">
+			<div class="form-text"><%=errors.get(4)%></div>
+			
 		</div>
 		<div>
 			<input type="hidden" name="idListGift" value="<%= request.getAttribute("idListGift")%>" />

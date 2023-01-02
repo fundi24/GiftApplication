@@ -74,6 +74,8 @@ public class ModifyGift extends HttpServlet {
 		int idListGift = (int) session.getAttribute("idListGift");
 		int idGift = Integer.parseInt(request.getParameter("idGift"));
 		
+		int error = 0;
+		
 		
 
 		if (request.getParameter("submit") != null) {
@@ -91,6 +93,14 @@ public class ModifyGift extends HttpServlet {
 					priceParam = Double.parseDouble(strPriceParam);
 				}
 				
+				if (linkToWebsiteParam != null && !linkToWebsiteParam.equals("")) {
+					boolean result = linkToWebsiteParam.matches("^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+					if(result == false) {
+						request.setAttribute("ErrorLink", "Le champ entré n'est pas un url valide.");
+						error = 1;
+					}
+				}
+				
 
 				boolean receipt = false;
 				ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift)
@@ -101,19 +111,26 @@ public class ModifyGift extends HttpServlet {
 						linkToWebsiteParam, gift);
 
 				
-				receipt = gift.update(giftWithoutList);
+				if(error == 0 ) {
+					receipt = gift.update(giftWithoutList);
 
-				if (receipt) {
+					if (receipt) {
+						request.setAttribute("idGift", idGift);
+						request.setAttribute("modifyGiftSuccess", "Modification réussie.");
+						getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
+					} else {
+						request.setAttribute("idGift", idGift);
+						request.setAttribute("modifyGiftError",
+								"Il semble qu'un problème se soit déroulé lors de la modification.");
+						getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
+					}
+				}else
+				{
 					request.setAttribute("idGift", idGift);
-					request.setAttribute("modifyGiftSuccess", "Modification réussie.");
-					getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
-				} else {
-					request.setAttribute("idGift", idGift);
-					request.setAttribute("modifyGiftError",
-							"Il semble qu'un problème se soit déroulé lors de la modification.");
 					getServletContext().getRequestDispatcher("/WEB-INF/ModifyGift.jsp").forward(request, response);
 				}
 				
+
 			}
 
 			
@@ -171,17 +188,5 @@ public class ModifyGift extends HttpServlet {
 				gift.isBooked(), gift.isMultiplePayment(), linkToWebsite, null);
 
 		return giftWithoutList;
-	}
-
-	public boolean checkErrors(ArrayList<String> errors) {
-		boolean error = false;
-
-		for (int i = 0; i < errors.size() && error != true; i++) {
-			if (!errors.get(i).isEmpty()) {
-				error = true;
-			}
-		}
-
-		return error;
 	}
 }
