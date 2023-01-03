@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
-
+	pageEncoding="UTF-8"%>
 <jsp:useBean id="gift" class="be.giftapplication.javabeans.Gift"
 	scope="request"></jsp:useBean>
 <%!String booked;
@@ -10,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Mon cadeau</title>
+<title>Cadeau</title>
 </head>
 <body>
 	<%@ include file="Header.jsp"%>
@@ -31,7 +30,7 @@
 		if (!gift.getPicture().equals("null")) {
 		%>
 		<img class="card-img-top"
-			src="data:image/jpg;base64,<%= gift.getPicture()%>" />
+			src="data:image/jpg;base64,<%=gift.getPicture()%>" />
 		<%
 		}
 		%>
@@ -58,39 +57,8 @@
 				<%=link%></p>
 		</div>
 	</div>
-
-	<div class="m-3">
-		<%
-		if (!gift.isBooked()) {
-		%>
-		<div class="mt-1">
-			<form action="modifygift" method="get">
-				<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" />
-				<td><button type="submit" class="btn btn-primary btn-sm">Modifier</button></td>
-			</form>
-		</div>
-		<%
-		} else {
-		%>
-		<div class="mt-1">
-			<form action="consultparticipations" method="get">
-				<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" />
-				<td><button type="submit" class="btn btn-primary btn-sm">Consulter
-						participations</button></td>
-			</form>
-		</div>
-		<%
-		}
-		%>
-	</div>
-
-	<div class="mt-1">
-		<form action="consultlistgift" method="get">
-			<input type="hidden" name="idListGift"
-				value="<%=request.getAttribute("idListGift")%>" />
-			<td><button type="submit" class="btn btn-primary btn-sm">Retour</button></td>
-		</form>
-	</div>
+	
+	
 
 </body>
 </html>

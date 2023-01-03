@@ -24,7 +24,8 @@ public class ListGiftDAO extends DAO<ListGift> {
 	public boolean create(ListGift obj) {
 		ClientResponse res;
 		try {
-			res = this.resource.path("listgift").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, mapper.writeValueAsString(obj));
+			res = this.resource.path("listgift").type(MediaType.APPLICATION_JSON).post(ClientResponse.class,
+					mapper.writeValueAsString(obj));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 201) {
 				return true;
@@ -45,14 +46,15 @@ public class ListGiftDAO extends DAO<ListGift> {
 	public boolean update(ListGift obj) {
 		boolean success = false;
 		ListGift listGift = null;
-		if(obj instanceof ListGift) {
+		if (obj instanceof ListGift) {
 			listGift = (ListGift) obj;
 		}
-		
+
 		ClientResponse res;
 		try {
-			res = this.resource.path("listgift").path(String.valueOf(listGift.getIdListGift())).header("Content-Type",
-		            "application/json;charset=UTF-8").put(ClientResponse.class, mapper.writeValueAsString(listGift));
+			res = this.resource.path("listgift").path(String.valueOf(listGift.getIdListGift()))
+					.header("Content-Type", "application/json;charset=UTF-8")
+					.put(ClientResponse.class, mapper.writeValueAsString(listGift));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 204) {
 				success = true;
@@ -60,32 +62,57 @@ public class ListGiftDAO extends DAO<ListGift> {
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
-		
+
 		return success;
 	}
 
 	@Override
 	public ListGift find(int id) {
-		return null;
+		ListGift listgift = null;
+
+		String APIResponse = this.resource.path("listgift").path(String.valueOf(id)).accept(MediaType.APPLICATION_JSON)
+				.get(String.class);
+
+		if (APIResponse != null) {
+			try {
+				JSONObject objJson = new JSONObject(APIResponse);
+				int idListGift = objJson.getInt("idListGift");
+				String name = objJson.getString("name");
+				JSONObject jsonDob = objJson.getJSONObject("deadline");
+				int year = jsonDob.getInt("year");
+				int month = jsonDob.getInt("monthValue");
+				int day = jsonDob.getInt("dayOfMonth");
+				boolean status = objJson.getBoolean("status");
+				String theme = objJson.getString("theme");
+				listgift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, null);
+
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+		}
+		return listgift;
+
 	}
 
 	@Override
 	public ArrayList<ListGift> findAll(Object obj) {
 		Customer customer = null;
-		if(obj instanceof Customer) {
-			 customer = (Customer) obj;
+		if (obj instanceof Customer) {
+			customer = (Customer) obj;
 		}
 		ArrayList<ListGift> giftLists = new ArrayList<>();
-		
-		String APIResponse = this.resource.path("listgift").path("customer").path(String.valueOf(customer.getIdCustomer())).accept(MediaType.APPLICATION_JSON).get(String.class);
-		
-		if(APIResponse != null) {
+
+		String APIResponse = this.resource.path("listgift").path("customer")
+				.path(String.valueOf(customer.getIdCustomer())).accept(MediaType.APPLICATION_JSON).get(String.class);
+
+		if (APIResponse != null) {
 			JSONArray array = new JSONArray(APIResponse);
-			
+
 			try {
-				
-				for(int i=0; i < array.length(); i++) {
-					
+
+				for (int i = 0; i < array.length(); i++) {
+
 					JSONObject objJson = array.getJSONObject(i);
 					int idListGift = objJson.getInt("idListGift");
 					String name = objJson.getString("name");
@@ -95,30 +122,30 @@ public class ListGiftDAO extends DAO<ListGift> {
 					int day = jsonDob.getInt("dayOfMonth");
 					boolean status = objJson.getBoolean("status");
 					String theme = objJson.getString("theme");
-					ListGift listGift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, customer);
+					ListGift listGift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme,
+							customer);
 					giftLists.add(listGift);
 				}
-			}
-			catch(Exception e)	{
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
-			}	
+			}
 		}
-		
-		
+
 		return giftLists;
 	}
 
-	public ArrayList<Customer> getInvitations(ListGift obj){
+	public ArrayList<Customer> getInvitations(ListGift obj) {
 		ArrayList<Customer> customers = new ArrayList<>();
-		
-		String APIResponse = this.resource.path("listgift").path("invitation").path(String.valueOf(obj.getIdListGift())).accept(MediaType.APPLICATION_JSON).get(String.class);
-		if(APIResponse != null) {
+
+		String APIResponse = this.resource.path("listgift").path("invitation").path(String.valueOf(obj.getIdListGift()))
+				.accept(MediaType.APPLICATION_JSON).get(String.class);
+		if (APIResponse != null) {
 			JSONArray array = new JSONArray(APIResponse);
-			
+
 			try {
-				
-				for(int i=0; i < array.length(); i++) {
-					
+
+				for (int i = 0; i < array.length(); i++) {
+
 					JSONObject json = array.getJSONObject(i);
 					int idCustomer = json.getInt("idCustomer");
 					String firstName = json.getString("firstName");
@@ -130,19 +157,18 @@ public class ListGiftDAO extends DAO<ListGift> {
 					LocalDate dateOfBirth = LocalDate.of(year, month, day);
 					String username = json.getString("username");
 					String password = json.getString("password");
-					
-					Customer customer = new Customer(idCustomer ,firstName, lastName, dateOfBirth, username, password);
-					
+
+					Customer customer = new Customer(idCustomer, firstName, lastName, dateOfBirth, username, password);
+
 					customers.add(customer);
-				
+
 				}
-			}
-			catch(Exception e)	{
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				return null;
-			}	
+			}
 		}
 		return customers;
-		
+
 	}
 }
