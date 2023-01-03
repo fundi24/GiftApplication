@@ -109,6 +109,12 @@
   	<servlet-class>be.giftapplication.servlets.InvitationConsultGift</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>Invite</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.Invite</servlet-class>
+  </servlet>
+  
+  
 
 
   <servlet-mapping>
@@ -185,6 +191,11 @@
   <servlet-mapping>
   	<servlet-name>InvitationConsultGift</servlet-name>
   	<url-pattern>/invitationconsultgift</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+  	<servlet-name>Invite</servlet-name>
+  	<url-pattern>/invite</url-pattern>
   </servlet-mapping>
   
   	

@@ -186,13 +186,16 @@ public class Customer implements Serializable {
 		}
 		return false;
 	}
+	
+	public static ArrayList<Customer> getCustomers(){
+		return customerDAO.findAll(null);
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Customer [idCustomer=" + idCustomer + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", dateOfBirth=" + dateOfBirth + ", username=" + username + ", password=" + password + "]";
 	}
-	
-	
-	
 
 }

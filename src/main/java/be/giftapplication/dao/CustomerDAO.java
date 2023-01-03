@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,10 +23,11 @@ public class CustomerDAO extends DAO<Customer> {
 	}
 
 	@Override
-	public boolean create(Customer obj) {		
+	public boolean create(Customer obj) {
 		ClientResponse res;
 		try {
-			res = this.resource.path("customer").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, mapper.writeValueAsString(obj));
+			res = this.resource.path("customer").post(ClientResponse.class,
+					mapper.writeValueAsString(obj));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 201) {
 				return true;
@@ -50,7 +52,8 @@ public class CustomerDAO extends DAO<Customer> {
 	@Override
 	public Customer find(int id) {
 		Customer customer = null;
-		String APIResponse = this.resource.path("customer").path(String.valueOf(id)).accept(MediaType.APPLICATION_JSON).get(String.class);
+		String APIResponse = this.resource.path("customer").path(String.valueOf(id)).accept(MediaType.APPLICATION_JSON)
+				.get(String.class);
 		try {
 			JSONObject json = new JSONObject(APIResponse);
 			String firstName = json.getString("firstName");
@@ -62,7 +65,7 @@ public class CustomerDAO extends DAO<Customer> {
 			LocalDate dateOfBirth = LocalDate.of(year, month, day);
 			String username = json.getString("username");
 			String password = json.getString("password");
-			customer = new Customer(id,firstName, lastName, dateOfBirth, username, password);
+			customer = new Customer(id, firstName, lastName, dateOfBirth, username, password);
 			return customer;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -72,21 +75,50 @@ public class CustomerDAO extends DAO<Customer> {
 
 	@Override
 	public ArrayList<Customer> findAll(Object obj) {
-		return null;
+		ArrayList<Customer> customers = new ArrayList<>();
+		
+		String APIResponse = this.resource.path("customer").accept(MediaType.APPLICATION_JSON).get(String.class);
+		if (APIResponse != null) {
+			JSONArray array = new JSONArray(APIResponse);
+			try {
+
+				for (int i = 0; i < array.length(); i++) {
+
+					JSONObject json = array.getJSONObject(i);
+					int id = json.getInt("idCustomer");
+					String firstName = json.getString("firstName");
+					String lastName = json.getString("lastName");
+					JSONObject jsonDob = json.getJSONObject("dateOfBirth");
+					int year = jsonDob.getInt("year");
+					int month = jsonDob.getInt("monthValue");
+					int day = jsonDob.getInt("dayOfMonth");
+					LocalDate dateOfBirth = LocalDate.of(year, month, day);
+					String username = json.getString("username");
+					String password = json.getString("password");
+					Customer customer = new Customer(id, firstName, lastName, dateOfBirth, username, password);
+					customers.add(customer);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+		}
+		return customers;
+
 	}
 
-	
 	public Customer find(String username, String password) {
 		ClientResponse res;
 		Customer customer = new Customer();
 		customer.setUsername(username);
 		customer.setPassword(password);
-		
+
 		try {
-			res = this.resource.path("customer").path("login").type(MediaType.APPLICATION_JSON).post(ClientResponse.class, mapper.writeValueAsString(customer));
+			res = this.resource.path("customer").path("login").type(MediaType.APPLICATION_JSON)
+					.post(ClientResponse.class, mapper.writeValueAsString(customer));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 200) {
-				String response=res.getEntity(String.class);
+				String response = res.getEntity(String.class);
 				JSONObject json = new JSONObject(response);
 				int id = json.getInt("idCustomer");
 				String firstName = json.getString("firstName");
@@ -96,11 +128,9 @@ public class CustomerDAO extends DAO<Customer> {
 				int month = jsonDob.getInt("monthValue");
 				int day = jsonDob.getInt("dayOfMonth");
 				LocalDate dateOfBirth = LocalDate.of(year, month, day);
-				customer = new Customer(id,firstName, lastName, dateOfBirth, username, password);
+				customer = new Customer(id, firstName, lastName, dateOfBirth, username, password);
 				return customer;
-			}
-			else
-			{
+			} else {
 				return null;
 			}
 		} catch (Exception ex) {
@@ -109,5 +139,5 @@ public class CustomerDAO extends DAO<Customer> {
 		}
 	}
 	
-	
+
 }
