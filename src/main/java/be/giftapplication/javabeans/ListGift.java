@@ -188,6 +188,17 @@ public class ListGift implements Serializable {
 		}
 		return success;
 	}
+	
+	
+	public boolean inviteUpdate(ListGift listgiftWithoutOwner, Customer invite) {
+		listgiftWithoutOwner.addInvitation(invite);
+		boolean success = listGiftDAO.update(listgiftWithoutOwner);
+		if(success) {
+			addInvitation(invite);
+			invite.addSharedListGift(this);
+		}
+		return success;
+	}
 
 
 	public boolean updateGiftsPriority(int[] selectedPriority) {

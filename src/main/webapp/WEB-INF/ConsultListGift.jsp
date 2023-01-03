@@ -85,6 +85,13 @@
 			</form>
 		</div>
 		<div class="col-auto">
+				<form action="invite" method="get"> 
+			<input type="hidden" name="idListGift" 
+				value="<%= listgift.getIdListGift() %>" />
+			<td><button type="submit" class = "btn btn-primary btn-sm">Inviter</button></td>
+		</form>
+		</div>
+		<div class="col-auto">
 			<form action="consultinvitations" method="get"> 
 				<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift() %>" />
 				<td><button type="submit" class = "btn btn-primary btn-sm">Consulter invitations</button></td>

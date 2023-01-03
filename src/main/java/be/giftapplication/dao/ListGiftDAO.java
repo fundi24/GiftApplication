@@ -24,7 +24,7 @@ public class ListGiftDAO extends DAO<ListGift> {
 	public boolean create(ListGift obj) {
 		ClientResponse res;
 		try {
-			res = this.resource.path("listgift").type(MediaType.APPLICATION_JSON).post(ClientResponse.class,
+			res = this.resource.path("listgift").post(ClientResponse.class,
 					mapper.writeValueAsString(obj));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 201) {
