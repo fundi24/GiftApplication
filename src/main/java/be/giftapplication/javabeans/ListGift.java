@@ -200,6 +200,11 @@ public class ListGift implements Serializable {
 		return success;
 		
 	}
+	
+	public ListGift findListGiftById() {
+		return listGiftDAO.find(idListGift);
+		
+	}
 
 	@Override
 	public String toString() {

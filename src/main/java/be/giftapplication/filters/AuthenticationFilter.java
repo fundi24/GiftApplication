@@ -27,6 +27,7 @@ public class AuthenticationFilter implements Filter {
 				chain.doFilter(request, response);
 			}
 			else {
+				//renvoyer au Register/Home ?
 				((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
 			}
 		}
