@@ -65,6 +65,10 @@ public class Participation implements Serializable {
 	
 	//Call to DAO
 	
+	public boolean create() {
+		return participationDAO.create(this);
+	}
+	
 	public static ArrayList<Participation> getParticipationsFromGift(Gift gift){
 		return participationDAO.findAll(gift);
 		

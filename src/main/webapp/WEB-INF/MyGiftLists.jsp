@@ -51,7 +51,7 @@
 	</table>
 
 	<div class="mt-1">
-		<a href="createlistgift" class="btn btn-primary btn-sm active">Ajouter liste</a>
+		<a href="createlistgift" class="btn btn-primary btn-sm">Ajouter liste</a>
 	</div>
 	
 

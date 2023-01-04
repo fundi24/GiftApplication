@@ -180,6 +180,9 @@ public class Gift implements Serializable {
 			this.price = giftWithoutList.getPrice();
 			this.picture = giftWithoutList.getPicture();
 			this.linkToWebsite = giftWithoutList.getLinkToWebsite();
+			this.priority = giftWithoutList.getPriority();
+			this.booked = giftWithoutList.isBooked();
+			this.multiplePayment = giftWithoutList.isMultiplePayment();
 		}
 		
 		return success;
