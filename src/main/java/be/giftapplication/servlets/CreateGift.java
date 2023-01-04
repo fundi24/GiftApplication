@@ -102,6 +102,7 @@ public class CreateGift extends HttpServlet {
 				
 				
 				if(gift.insert()) {
+					listGift.addGift(gift);
 					request.setAttribute("createGiftSuccess", "Création du cadeau réussite.");
 					request.setAttribute("idListGift", idListGift);
 					request.setAttribute("errors", errors);
