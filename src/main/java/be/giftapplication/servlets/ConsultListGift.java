@@ -83,6 +83,7 @@ public class ConsultListGift extends HttpServlet {
 		listGiftWithoutOwner.setIdListGift(idListGift);
 		listGiftWithoutOwner.setStatus(listgift.isStatus());
 		listGiftWithoutOwner.setDeadline(LocalDate.of(1000, 1, 1));
+		listGiftWithoutOwner.setInvitations(listgift.getInvitations());
 		boolean result = listGiftWithoutOwner.update();
 		if(result) {
 			response.sendRedirect("mygiftlists");

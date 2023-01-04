@@ -7,6 +7,11 @@
     <filter-class>be.giftapplication.filters.AuthenticationFilter</filter-class>
   </filter>
   
+   <filter>
+    <filter-name>InvitationFilter</filter-name>
+    <filter-class>be.giftapplication.filters.InvitationFilter</filter-class>
+  </filter>
+  
   
   <filter-mapping>
     <filter-name>AuthenticationFilter</filter-name>
@@ -21,6 +26,13 @@
     <servlet-name>MyNotifications</servlet-name>
     <servlet-name>ConsultParticipations</servlet-name>
     <servlet-name>MyGiftLists</servlet-name>
+  </filter-mapping>
+  
+  <filter-mapping>
+    <filter-name>InvitationFilter</filter-name>
+    <servlet-name>InvitationListGift</servlet-name>
+    <servlet-name>InvitationConsultGift</servlet-name>
+    <servlet-name>Invite</servlet-name>
   </filter-mapping>
   
   

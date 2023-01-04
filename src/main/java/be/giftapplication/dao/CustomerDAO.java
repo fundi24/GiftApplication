@@ -26,8 +26,8 @@ public class CustomerDAO extends DAO<Customer> {
 	public boolean create(Customer obj) {
 		ClientResponse res;
 		try {
-			res = this.resource.path("customer").post(ClientResponse.class,
-					mapper.writeValueAsString(obj));
+			res = this.resource.path("customer").header("Content-Type",
+		            "application/json;charset=UTF-8").post(ClientResponse.class, mapper.writeValueAsString(obj));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 201) {
 				return true;
