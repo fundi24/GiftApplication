@@ -40,6 +40,7 @@ public class InvitationListGift extends HttpServlet {
 			session.setAttribute("listgift", listgift);
 			
 			
+			
 			getServletContext().getRequestDispatcher("/WEB-INF/InvitationListGift.jsp").forward(request, response);
 			
 		} catch(Exception e) {

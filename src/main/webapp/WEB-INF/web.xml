@@ -26,13 +26,13 @@
     <servlet-name>MyNotifications</servlet-name>
     <servlet-name>ConsultParticipations</servlet-name>
     <servlet-name>MyGiftLists</servlet-name>
+    <servlet-name>Invite</servlet-name>
   </filter-mapping>
   
   <filter-mapping>
     <filter-name>InvitationFilter</filter-name>
     <servlet-name>InvitationListGift</servlet-name>
     <servlet-name>InvitationConsultGift</servlet-name>
-    <servlet-name>Invite</servlet-name>
   </filter-mapping>
   
   

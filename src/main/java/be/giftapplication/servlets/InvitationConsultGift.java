@@ -31,12 +31,15 @@ public class InvitationConsultGift extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			HttpSession session = request.getSession();
 			ListGift listgift = (ListGift) session.getAttribute("listgift");
 			int idGift = Integer.parseInt(request.getParameter("idGift"));
+			
 			Gift gift = listgift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
 			
 			request.setAttribute("gift", gift);
+			
 			
 			getServletContext().getRequestDispatcher("/WEB-INF/InvitationConsultGift.jsp").forward(request, response);
 			

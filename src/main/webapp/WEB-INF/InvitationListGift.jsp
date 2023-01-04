@@ -44,6 +44,8 @@
 			<form action="invitationconsultgift" method="get"> 
 			<input type="hidden" name="idGift" 
 				value="<%= g.getIdGift() %>" />
+			<input type="hidden" name="idListGift" 
+				value="<%= listgift.getIdListGift() %>" />
 			<td><button type="submit" class = "btn btn-primary btn-sm">Consulter</button></td>
 			</form>
 		</tr>
