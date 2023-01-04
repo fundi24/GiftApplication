@@ -25,7 +25,8 @@ public class GiftDAO extends DAO<Gift> {
 	public boolean create(Gift obj) {
 		ClientResponse res;
 		try {
-			res = this.resource.path("gift").post(ClientResponse.class, mapper.writeValueAsString(obj));
+			res = this.resource.path("gift").header("Content-Type",
+		            "application/json;charset=UTF-8").post(ClientResponse.class, mapper.writeValueAsString(obj));
 			int httpResponseCode = res.getStatus();
 			if (httpResponseCode == 201) {
 				return true;

@@ -167,8 +167,6 @@ public class ListGift implements Serializable {
 			}
 		}
 		
-		
-		
 		return listGiftDAO.update(this);
 	}
 	
