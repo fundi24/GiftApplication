@@ -60,14 +60,19 @@
 		</div>
 	</div>
 
+
+	
+	<%
+	if (!gift.isMultiplePayment()) {
+	%>
 	<form action="invitationconsultgift" method="post">
 		<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" /> <input
 			type="hidden" name="idListGift" value="<%=listgift.getIdListGift()%>" />
 		<td><button type="submit" class="btn btn-primary btn-sm m-2">Offrir</button></td>
 	</form>
-
+	<%} %>
 	<%
-	if (!gift.isBooked()) {
+	if (gift.calculTotal() < gift.getPrice()) {
 	%>
 	<form action="multiplepaymentoffer" method="get">
 		<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" /> <input

@@ -13,11 +13,13 @@
 <body>
 	<%@ include file="Header.jsp"%>
 	<h1><%=gift.getName()%></h1>
+	<p>Montant restant à payer : <%= gift.getPrice() - gift.calculTotal() %></p>
+	
 	<form action="multiplepaymentoffer" method="POST">
 		<div class="mb-3">
 			<label for="price" class="form-label">Prix</label> <input
-				type="number" class="form-control" name="price" id="price" min="0"
-				step="0.01">
+				type="number" class="form-control" name="price" id="price" min="1"
+				step="0.01" required>
 		</div>
 		<input type="hidden" name="idGift" value="<%=gift.getIdGift()%>" />
 			<input type="hidden" name="idListGift" value="<%= listgift.getIdListGift()%>" />
@@ -32,5 +34,25 @@
 			<td><button type="submit" class="btn btn-primary btn-sm">Retour</button></td>
 		</form>
 	</div>
+	
+	
+	<%
+	if (request.getAttribute("success") != null) {
+	%>
+	<div class="alert alert-success">
+		<p><%=request.getAttribute("success")%></p>
+	</div>
+	<%
+	}
+	%>
+	<%
+	if (request.getAttribute("error") != null) {
+	%>
+	<div class="alert alert-danger">
+		<p><%=request.getAttribute("error")%></p>
+	</div>
+	<%
+	}
+	%>
 </body>
 </html>

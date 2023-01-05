@@ -39,6 +39,7 @@ public class InvitationConsultGift extends HttpServlet {
 			int idGift = Integer.parseInt(request.getParameter("idGift"));
 			
 			Gift gift = listgift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
+			gift.getGiftParticipations();
 			
 			request.setAttribute("gift", gift);
 			
@@ -62,6 +63,7 @@ public class InvitationConsultGift extends HttpServlet {
 		int idGift = Integer.parseInt(request.getParameter("idGift"));
 		Gift gift = listgift.getGifts().stream().filter(g -> g.getIdGift() == idGift).findFirst().orElse(null);
 		
+		
 		if(gift.isMultiplePayment()) {
 			//Redirect to multiple payment form
 			getServletContext().getRequestDispatcher("/WEB-INF/MultiplePaymentOffer.jsp").forward(request, response);
@@ -83,7 +85,7 @@ public class InvitationConsultGift extends HttpServlet {
 				Participation participation = new Participation(0, gift.getPrice(), customerWithoutList, giftWithoutList);
 				boolean success = participation.create();
 				if(success) {
-					
+					gift.addParticipation(participation);
 					request.setAttribute("gift", gift);
 					request.setAttribute("success", "Le cadeau a été réservé avec succès");
 					getServletContext().getRequestDispatcher("/WEB-INF/InvitationConsultGift.jsp").forward(request, response);
