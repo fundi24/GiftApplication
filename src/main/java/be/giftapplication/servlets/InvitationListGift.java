@@ -35,10 +35,10 @@ public class InvitationListGift extends HttpServlet {
 			listgift.setIdListGift(idListGift);
 			listgift = listgift.findListGiftById();
 			
+			
 			listgift.getListGiftGifts();
 			HttpSession session = request.getSession();
 			session.setAttribute("listgift", listgift);
-			
 			
 			
 			getServletContext().getRequestDispatcher("/WEB-INF/InvitationListGift.jsp").forward(request, response);
