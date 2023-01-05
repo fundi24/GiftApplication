@@ -63,6 +63,10 @@ public class Notification implements Serializable {
 	}
 	
 	//Call to DAO
+	public boolean create() {
+		return notificationDAO.create(this);
+	}
+	
 	public static ArrayList<Notification> getNotificationFromCustomer(Customer customer) {
 		
 		return notificationDAO.findAll(customer);

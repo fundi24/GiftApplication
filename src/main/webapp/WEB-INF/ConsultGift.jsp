@@ -26,7 +26,7 @@
 	<p></p>
 
 
-	<div class="card" style="width: 50rem;">
+	<div class="card m-2" style="width: 25rem;">
 		<%
 		if (!gift.getPicture().equals("null")) {
 		%>

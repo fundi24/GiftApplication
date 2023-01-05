@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import be.giftapplication.javabeans.Customer;
 import be.giftapplication.javabeans.ListGift;
+import be.giftapplication.javabeans.Notification;
 
 /**
  * Servlet implementation class Invite
@@ -62,21 +63,25 @@ public class Invite extends HttpServlet {
 		boolean verification = false;
 		
 		Customer customer = (Customer) session.getAttribute("customer");
-		ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
-		ListGift listGiftWithoutOwner = new ListGift(idListGift,listGift.getName(),listGift.getDeadline(),listGift.isStatus(),listGift.getTheme(),null);
+		ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
+		ListGift listGiftWithoutOwner = new ListGift(idListGift,listgift.getName(),listgift.getDeadline(),listgift.isStatus(),listgift.getTheme(),null);
 		
-		for(int i=0; i<listGift.getInvitations().size(); i++) {
-			if(listGift.getInvitations().get(i).getIdCustomer() == idInvite ) {
+		for(int i=0; i<listgift.getInvitations().size(); i++) {
+			if(listgift.getInvitations().get(i).getIdCustomer() == idInvite ) {
 				verification = true;
 			}
 		}
 		Customer invite = invites.stream().filter(i -> i.getIdCustomer() == idInvite).findFirst().orElse(null);
 		
 		if(verification == false) {
-			boolean result = listGift.inviteUpdate(listGiftWithoutOwner, invite);
+			boolean result = listgift.inviteUpdate(listGiftWithoutOwner, invite);
 			if(result) {
+				Customer invited = new Customer();
+				invited.setIdCustomer(invite.getIdCustomer());
+				Notification notification = new Notification(0, customer.getUsername() + " vous a invité dans sa liste [" + listgift.getName() + "].", false, invited);
+				notification.create();
 				request.setAttribute("customers", invites);
-				request.setAttribute("success", "L'invité a été ajouté !");
+				request.setAttribute("success", "L'invité a été ajouté !"); 
 				request.setAttribute("idListGift", idListGift);
 				getServletContext().getRequestDispatcher("/WEB-INF/Invite.jsp").forward(request, response);
 			}

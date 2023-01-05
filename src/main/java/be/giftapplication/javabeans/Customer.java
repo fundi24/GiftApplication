@@ -168,7 +168,7 @@ public class Customer implements Serializable {
 	
 	public static Customer login (String username, String password) {
 		CustomerDAO customerdao = new CustomerDAO();
-		return customerdao.find(username, password);
+		return customerdao.login(username, password);
 	}
 	
 	public boolean getCustomerListGifts(){
@@ -190,6 +190,7 @@ public class Customer implements Serializable {
 	public static ArrayList<Customer> getCustomers(){
 		return customerDAO.findAll(null);
 	}
+	
 	
 	
 	@Override
