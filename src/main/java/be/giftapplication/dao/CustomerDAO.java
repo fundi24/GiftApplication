@@ -49,16 +49,10 @@ public class CustomerDAO extends DAO<Customer> {
 		return false;
 	}
 	
+
 	@Override
 	public Customer find(int id) {
-		System.out.println("DAO FIND");
-		return null;
 		
-	}
-
-	/*@Override
-	public Customer find(int id) {
-		System.out.println("DAO FIND");
 		Customer customer = null;
 		
 		String APIResponse = this.resource.path("customer").path(String.valueOf(id)).accept(MediaType.APPLICATION_JSON)
@@ -80,7 +74,7 @@ public class CustomerDAO extends DAO<Customer> {
 			System.out.println(ex.getMessage());
 			return customer;
 		}
-	}*/
+	}
 
 	@Override
 	public ArrayList<Customer> findAll(Object obj) {
@@ -126,7 +120,6 @@ public class CustomerDAO extends DAO<Customer> {
 			res = this.resource.path("customer").path("login").header("Content-Type",
 		            "application/json;charset=UTF-8")
 					.post(ClientResponse.class, mapper.writeValueAsString(customer));
-			
 			
 			int httpResponseCode = res.getStatus();
 			

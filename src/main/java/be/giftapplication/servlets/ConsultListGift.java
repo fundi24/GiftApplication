@@ -42,7 +42,6 @@ public class ConsultListGift extends HttpServlet {
 
 			ListGift listgift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 
-			//! A RELIRE !
 			boolean receipt = listgift.getListGiftGifts();
 			if(receipt) {
 				session.setAttribute("customer", customer);

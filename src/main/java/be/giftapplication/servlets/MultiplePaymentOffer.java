@@ -69,8 +69,6 @@ public class MultiplePaymentOffer extends HttpServlet {
 		double remainsToPay = 0;
 
 		listgift.getListGiftInvitations();
-
-
 		gift.getGiftParticipations();
 
 		sumParticipation = gift.calculTotal();
@@ -97,6 +95,7 @@ public class MultiplePaymentOffer extends HttpServlet {
 					Gift giftWithoutList = new Gift(gift.getIdGift(), gift.getName(), gift.getDescription(),
 							gift.getPrice(), gift.getPriority(), gift.getPicture(), true, true, gift.getLinkToWebsite(),
 							null);
+					//Update gift with multiplePayment and Booked to true
 					boolean receipt = gift.update(giftWithoutList);
 
 					Customer customerWithoutList = new Customer();
@@ -109,7 +108,7 @@ public class MultiplePaymentOffer extends HttpServlet {
 							// Send notification to every customers in the invitations
 							for (int i = 0; i < listgift.getInvitations().size(); i++) {
 								if(customer.getIdCustomer() != listgift.getInvitations().get(i).getIdCustomer()) {
-									Notification notification = new Notification(0, customer.getUsername() + " a payé "+ price +"€ pour le cadeau [" + gift.getName() + "] ", false, listgift.getInvitations().get(i));
+									Notification notification = new Notification(0, customer.getUsername() + " a payé "+ price +"€ pour le cadeau [" + gift.getName() + "] de la liste ["+ listgift.getName() +"] appartenant à " + listgift.getOwner().getUsername(), false, listgift.getInvitations().get(i));
 									notification.create();
 								}
 								

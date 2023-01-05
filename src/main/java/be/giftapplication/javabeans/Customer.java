@@ -191,6 +191,17 @@ public class Customer implements Serializable {
 		return customerDAO.findAll(null);
 	}
 	
+	public Customer findWithId() {
+		Customer customer =  customerDAO.find(idCustomer);
+		if(customer != null) {
+			this.firstName = customer.getFirstName();
+			this.lastName = customer.getLastName();
+			this.dateOfBirth = customer.getDateOfBirth();
+			this.username = customer.getUsername();
+			this.password = customer.getPassword();
+		}
+		return customerDAO.find(idCustomer);
+	}
 	
 	
 	@Override
