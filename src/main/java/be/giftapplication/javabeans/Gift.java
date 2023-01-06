@@ -140,6 +140,16 @@ public class Gift implements Serializable {
 		this.participations = participations;
 	}
 	
+	//Add and remove for lists
+	
+	public void addParticipation(Participation participation) {
+		participations.add(participation);
+	}
+		
+	public void removeParticipation(Participation participation) {
+		participations.remove(participation);
+	}
+	
 	public double calculTotal() {
 		double total = 0;
 		
@@ -151,15 +161,6 @@ public class Gift implements Serializable {
 		
 	}
 
-	//Add and remove for lists
-	
-	public void addParticipation(Participation participation) {
-		participations.add(participation);
-	}
-		
-	public void removeParticipation(Participation participation) {
-		participations.remove(participation);
-	}
 		
 	//Call to DAO
 	

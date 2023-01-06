@@ -4,8 +4,7 @@
 <jsp:useBean id="gift" class="be.giftapplication.javabeans.Gift"
 	scope="request"></jsp:useBean>
 <%!String booked;
-	String multiplePayment;
-	String link = "";%>
+	String multiplePayment;%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,10 +16,6 @@
 	<%
 	booked = gift.isBooked() ? "Réservé" : "Non réservé";
 	multiplePayment = gift.isMultiplePayment() ? "Oui" : "Non";
-
-	if (!gift.getLinkToWebsite().equals("null")) {
-		link = gift.getLinkToWebsite();
-	}
 	%>
 	<h2 class="m-2">Mon cadeau</h2>
 	<p></p>
@@ -53,9 +48,15 @@
 			<p class="card-text">
 				Paiement Multiple :
 				<%=multiplePayment%></p>
+			<%if(!gift.getLinkToWebsite().equals("null")){ %>
 			<p class="card-text">
 				Lien :
-				<%=link%></p>
+				<%=gift.getLinkToWebsite()%></p><%} else{ %>
+				<p class="card-text">
+				Lien :
+			  </p>
+			  <%} %>
+				
 		</div>
 	</div>
 

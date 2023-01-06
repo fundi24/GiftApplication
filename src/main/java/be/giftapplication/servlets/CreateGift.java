@@ -99,7 +99,7 @@ public class CreateGift extends HttpServlet {
 				
 				//giving a listGift with only the id because the DAO only need the id
 				Gift gift = new Gift(0, nameParam, descriptionParam, priceParam, priority, picture, false, false, linkToWebsiteParam, listGiftWithoutList);
-				
+				System.out.println(gift);
 				
 				if(gift.insert()) {
 					listGift.addGift(gift);

@@ -47,7 +47,6 @@ public class ConsultGift extends HttpServlet {
 			int idGift = Integer.parseInt(request.getParameter("idGift"));
 			ListGift listGift = customer.getMyListGifts().stream().filter(l -> l.getIdListGift() == idListGift).findFirst().orElse(null);
 			Gift gift = listGift.getGifts().stream().filter(l -> l.getIdGift() == idGift).findFirst().orElse(null);
-			
 			request.setAttribute("gift", gift);
 			
 			request.setAttribute("idListGift", idListGift);
