@@ -193,7 +193,6 @@ public class ListGift implements Serializable {
 		boolean success = listGiftDAO.update(listgiftWithoutOwner);
 		if(success) {
 			addInvitation(invite);
-			invite.addSharedListGift(this);
 		}
 		return success;
 	}

@@ -77,7 +77,6 @@ public class ListGiftDAO extends DAO<ListGift> {
 		if (APIResponse != null) {
 			try {
 				JSONObject objJson = new JSONObject(APIResponse);
-				System.out.println(objJson);
 				int idListGift = objJson.getInt("idListGift");
 				String name = objJson.getString("name");
 				JSONObject jsonDob = objJson.getJSONObject("deadline");
