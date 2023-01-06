@@ -35,6 +35,8 @@ public class InvitationListGift extends HttpServlet {
 			listgift.setIdListGift(idListGift);
 			listgift = listgift.findListGiftById();
 			
+			listgift.getOwner().findWithId();
+			
 			listgift.getListGiftGifts();
 			HttpSession session = request.getSession();
 			session.setAttribute("listgift", listgift);

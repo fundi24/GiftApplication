@@ -35,6 +35,7 @@ public class ConsultInvitations extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			Customer customer = (Customer) session.getAttribute("customer");
 			boolean receipt = false;
+			
 			for(int i=0; i < customer.getMyListGifts().size(); i++) {
 				if(customer.getMyListGifts().get(i).getIdListGift() == idListGift) {
 					receipt = customer.getMyListGifts().get(i).getListGiftInvitations();

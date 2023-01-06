@@ -9,6 +9,8 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.sun.jersey.api.client.ClientResponse;
+
 import be.giftapplication.javabeans.Customer;
 import be.giftapplication.javabeans.Gift;
 import be.giftapplication.javabeans.ListGift;
@@ -22,7 +24,20 @@ public class ParticipationDAO extends DAO<Participation> {
 
     @Override
     public boolean create(Participation obj) {
-        return false;
+    	ClientResponse res;
+		try {
+			res = this.resource.path("participation").header("Content-Type",
+		            "application/json;charset=UTF-8").post(ClientResponse.class, mapper.writeValueAsString(obj));
+			int httpResponseCode = res.getStatus();
+			if (httpResponseCode == 201) {
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return false;
+		}
+		return false;
+        
     }
 
     @Override

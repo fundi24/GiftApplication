@@ -22,6 +22,18 @@ public class NotificationDAO extends DAO<Notification> {
 
 	@Override
 	public boolean create(Notification obj) {
+		ClientResponse res;
+		try {
+			res = this.resource.path("notification").header("Content-Type",
+		            "application/json;charset=UTF-8").post(ClientResponse.class, mapper.writeValueAsString(obj));
+			int httpResponseCode = res.getStatus();
+			if (httpResponseCode == 201) {
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return false;
+		}
 		return false;
 	}
 

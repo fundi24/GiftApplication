@@ -26,13 +26,14 @@
     <servlet-name>MyNotifications</servlet-name>
     <servlet-name>ConsultParticipations</servlet-name>
     <servlet-name>MyGiftLists</servlet-name>
+    <servlet-name>Invite</servlet-name>
   </filter-mapping>
   
   <filter-mapping>
     <filter-name>InvitationFilter</filter-name>
     <servlet-name>InvitationListGift</servlet-name>
     <servlet-name>InvitationConsultGift</servlet-name>
-    <servlet-name>Invite</servlet-name>
+    <servlet-name>MultiplePaymentOffer</servlet-name>
   </filter-mapping>
   
   
@@ -126,8 +127,11 @@
   	<servlet-class>be.giftapplication.servlets.Invite</servlet-class>
   </servlet>
   
+   <servlet>
+  	<servlet-name>MultiplePaymentOffer</servlet-name>
+  	<servlet-class>be.giftapplication.servlets.MultiplePaymentOffer</servlet-class>
+  </servlet>
   
-
 
   <servlet-mapping>
   	<servlet-name>Home</servlet-name>
@@ -208,6 +212,11 @@
   <servlet-mapping>
   	<servlet-name>Invite</servlet-name>
   	<url-pattern>/invite</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+  	<servlet-name>MultiplePaymentOffer</servlet-name>
+  	<url-pattern>/multiplepaymentoffer</url-pattern>
   </servlet-mapping>
   
   	

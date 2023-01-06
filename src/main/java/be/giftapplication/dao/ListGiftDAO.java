@@ -85,7 +85,12 @@ public class ListGiftDAO extends DAO<ListGift> {
 				int day = jsonDob.getInt("dayOfMonth");
 				boolean status = objJson.getBoolean("status");
 				String theme = objJson.getString("theme");
-				listgift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, null);
+				JSONObject jsonOwner = objJson.getJSONObject("owner");
+				int idOwner = jsonOwner.getInt("idCustomer");
+				Customer customer = new Customer();
+				customer.setIdCustomer(idOwner);
+				
+				listgift = new ListGift(idListGift, name, LocalDate.of(year, month, day), status, theme, customer);
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
